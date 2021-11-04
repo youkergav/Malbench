@@ -29,8 +29,16 @@ processes = []
 
 # Start the malware samples.
 for filename in os.listdir(args.filepath):
-    process = subprocess.Popen([filename])
-    processes.append(process)
+    filepath = os.path.join(args.filepath, filename)
+
+    try:
+        process = subprocess.Popen([filename])
+        processes.append(process)
+    except WindowsError as error:
+        # Skip process monitoring if the file was blocked on startup.
+        if error.winerror == 225:
+            print_good(filepath)
+            results["passed"].append(filepath)
 
     time.sleep(.2)
 
