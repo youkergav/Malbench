@@ -55,7 +55,7 @@ for filename in os.listdir(args.filepath):
         keys.append(filepath)
         samples[filepath] = {
             "process": process,
-            "start_time": time.time(),
+            "timestamp": time.time(),
             "detected": None
         }
     except WindowsError as error:
@@ -65,7 +65,7 @@ for filename in os.listdir(args.filepath):
 
             samples[filepath] = {
                 "process": None,
-                "start_time": None,
+                "timestamp": None,
                 "detected": True
             }
 
@@ -79,7 +79,12 @@ while len(keys) != 0:
         name = sample["process"].args[0]
         return_code = sample["process"].poll()
 
-        if return_code != None:
+        if time.time() - sample["timestamp"] > 2:
+            print_bad(name)
+            sample["detected"] = False
+
+            keys.remove(key)
+        elif return_code != None:
             if return_code != 0:
                 print_good(name)
                 sample["detected"] = True
