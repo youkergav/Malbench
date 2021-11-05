@@ -62,10 +62,10 @@ while len(processes) != 0:
 
 # Print the results.
 if results["failed"]:
-    print("\nDone. Found \033[91m{}\033[00m samples failed to detect:".format(len(results["failed"])))
+    print("\nDone. Detection rate: \033[91m{}%\033[00m ({} samples):".format((len(results["passed"]) / (len(results["passed"]) + len(results["failed"]))) * 100, len(results["failed"])))
 
     for result in results["failed"]:
         print(result)
     print("")
 else:
-    print("\nDone. All malware detected.")
+    print("\nDone. Detection rate: [\033[92m100%\033[00m]")
