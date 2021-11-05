@@ -1,5 +1,6 @@
 import os
 import time
+import datetime
 import argparse
 import subprocess
 
@@ -15,57 +16,89 @@ def dir_path(path):
     else:
         raise argparse.ArgumentTypeError(path + " is not a valid path")
 
-results = {
-    "passed": [],
-    "failed": []
-}
+def calc_detection_rate(samples):
+    failed = 0
+    total = 0
+
+    for sample in samples.values():
+        if sample["detected"] == True:
+            failed += 1
+
+        total += 1
+
+    return (failed / total) * 100
+        
+def get_failed_samples(samples):
+    failed = []
+
+    for filepath, sample in samples.items():
+        if sample["detected"] == False:
+            failed.append(filepath)
+
+    return failed
 
 parser = argparse.ArgumentParser()
 parser.add_argument("filepath", type=dir_path, help="filepath to the malware samples")
 args = parser.parse_args()
 
 print("Running sample malware...\n")
-processes = []
+samples = {}
+keys = []
 
 # Start the malware samples.
 for filename in os.listdir(args.filepath):
     filepath = os.path.join(args.filepath, filename)
 
     try:
-        process = subprocess.Popen([filename], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_BREAKAWAY_FROM_JOB)
-        processes.append(process)
+        process = subprocess.Popen([filepath], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_BREAKAWAY_FROM_JOB)
+        
+        keys.append(filepath)
+        samples[filepath] = {
+            "process": process,
+            "start_time": time.time(),
+            "detected": None
+        }
     except WindowsError as error:
         # Skip process monitoring if the file was blocked on startup.
         if error.winerror == 225:
             print_good(filepath)
-            results["passed"].append(filepath)
+
+            samples[filepath] = {
+                "process": None,
+                "start_time": None,
+                "detected": True
+            }
 
     time.sleep(.2)
 
 # Monitor the malware processes for execution and prevention.
-while len(processes) != 0:
-    for process in processes:
-        name = process.args[0]
-        return_code = process.poll()
+while len(keys) != 0:
+    for key in keys:
+        sample = samples[key]
+
+        name = sample["process"].args[0]
+        return_code = sample["process"].poll()
 
         if return_code != None:
             if return_code != 0:
                 print_good(name)
-                results["passed"].append(name)
+                sample["detected"] = True
             else:
                 print_bad(name)
-                results["failed"].append(name)
+                sample["detected"] = False
             
-            processes.remove(process)
+            keys.remove(key)
 
     time.sleep(.2)
 
-# Print the results.
-if results["failed"]:
-    print("\nDone. Detection rate: \033[91m{}%\033[00m ({} samples):".format((len(results["passed"]) / (len(results["passed"]) + len(results["failed"]))) * 100, len(results["failed"])))
+detection_rate = calc_detection_rate(samples)
 
-    for result in results["failed"]:
-        print(result)
-    print("")
+if detection_rate == 100:
+    print("\nDone. Detection rate: \033[92m{}\033[00m".format(detection_rate))
 else:
-    print("\nDone. Detection rate: [\033[92m100%\033[00m]")
+    failed = get_failed_samples(samples)
+
+    print("\nDone. Detection rate: \033[91m{}%\033[00m ({} samples):".format(detection_rate, len(failed)))
+    for filename in failed:
+        print(filename)
+    print("")
