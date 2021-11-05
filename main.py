@@ -32,7 +32,7 @@ for filename in os.listdir(args.filepath):
     filepath = os.path.join(args.filepath, filename)
 
     try:
-        process = subprocess.Popen([filename])
+        process = subprocess.Popen([filename], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_BREAKAWAY_FROM_JOB)
         processes.append(process)
     except WindowsError as error:
         # Skip process monitoring if the file was blocked on startup.
