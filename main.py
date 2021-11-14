@@ -1,6 +1,5 @@
 import os
 import time
-import datetime
 import argparse
 import subprocess
 
@@ -25,6 +24,9 @@ def calc_detection_rate(samples):
             failed += 1
 
         total += 1
+
+    if failed == 0:
+        return 0
 
     return (failed / total) * 100
         
@@ -68,6 +70,8 @@ for filename in os.listdir(args.filepath):
                 "timestamp": None,
                 "detected": True
             }
+        else:
+            raise
 
     time.sleep(.2)
 
