@@ -30,6 +30,7 @@ def get_args():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("path", type=__get_path__, help="file or folder path to the malware samples")
-    parser.add_argument("--no-banner", default=False, action="store_true", help="hides the banner logo")
+    parser.add_argument("-v", "--verbose", action="store_true", help="prints additional info")
+    parser.add_argument("--no-banner", action="store_true", help="hides the banner logo")
     
     return parser.parse_args()

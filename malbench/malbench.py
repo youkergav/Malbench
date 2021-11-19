@@ -1,20 +1,22 @@
-import os
 import time
 import args
-import cprint
+import messages
 import samples
 import metrics
 
 args = args.get_args()
 
+message = messages.Message(args.verbose)
+
 if not args.no_banner:
-    cprint.banner()
+    message.banner()
 
 print("Running sample malware...\n")
 malware = {}
 keys = []
 
 # Start the malware samples.
+message.info("Loading malware...")
 for file in args.path:
     sample = samples.run(file)
     malware[file] = sample
@@ -22,11 +24,12 @@ for file in args.path:
     if not sample["detected"]:
         keys.append(file)
     else:
-        cprint.good(file)
+        message.good("Detected {}".format(file)) if args.verbose else message.good(file)
 
     time.sleep(.2)
 
 # Monitor the malware processes for prevention.
+message.info("Monitoring malware for detection...")
 while len(keys):
     for key in keys:
         detected = samples.monitor(malware[key])
@@ -36,9 +39,9 @@ while len(keys):
             keys.remove(key)
 
             if detected:
-                cprint.good(key)
+                message.good("Detected {}".format(key)) if args.verbose else message.good(key)
             else:
-                cprint.bad(key)
+                message.bad("Failed to detect {}".format(key)) if args.verbose else message.bad(key)
     
     time.sleep(.2)
 
@@ -46,11 +49,11 @@ while len(keys):
 detection_rate = metrics.detection_rate(malware)
 
 if detection_rate == 100:
-    print("\nDone. Detection rate: {}".format(cprint.green(str(detection_rate) + "%")))
+    print("\nDone. Detection rate: {}".format(message.green(str(detection_rate) + "%")))
 else:
     failed = metrics.failed_samples(malware)
 
-    print("\nDone. Detection rate: {} ({} samples failed):".format(cprint.red(str(detection_rate) + "%"), len(failed)))
+    print("\nDone. Detection rate: {} ({} samples failed):".format(message.red(str(detection_rate) + "%"), len(failed)))
 
     for filename in failed:
         print(filename)
