@@ -15,16 +15,14 @@ malware = {}
 keys = []
 
 # Start the malware samples.
-for filename in os.listdir(args.path):
-    filepath = os.path.join(args.path, filename)
-
-    sample = samples.run(filepath)
-    malware[filepath] = sample
+for file in args.path:
+    sample = samples.run(file)
+    malware[file] = sample
 
     if not sample["detected"]:
-        keys.append(filepath)
+        keys.append(file)
     else:
-        cprint.good(filepath)
+        cprint.good(file)
 
     time.sleep(.2)
 
