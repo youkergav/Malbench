@@ -1,23 +1,25 @@
-def detection_rate(samples):
-    failed = 0
-    total = 0
+class Metric:
+    def __init__(self, samples):
+        self.samples = samples
 
-    for sample in samples.values():
-        if sample["detected"] == True:
-            failed += 1
+    def detection_rate(self):
+        failed = 0
+        total = 0
 
-        total += 1
+        for sample in self.samples.values():
+            if sample.detected == True:
+                failed += 1
+            
+        if failed == 0:
+            return 0
 
-    if failed == 0:
-        return 0
+        return (failed / len(self.samples.values())) * 100
 
-    return (failed / total) * 100
+    def failed_samples(self):
+        failed = []
 
-def failed_samples(samples):
-    failed = []
+        for name, sample in self.samples.items():
+            if sample.detected == False:
+                failed.append(name)
 
-    for filepath, sample in samples.items():
-        if sample["detected"] == False:
-            failed.append(filepath)
-
-    return failed
+        return failed

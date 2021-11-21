@@ -1,38 +1,45 @@
+import os
 import time
 import subprocess
 
-def run(filepath, args=[]):
-    command = [filepath] + args
+class Sample:
+    def __init__(self, filepath, args=[]):
+        self.filepath = filepath
+        self.args = args
+        self.name = self.__get_name__(self.filepath)
+        self.timestamp = time.time()
+        self.detected = None
+        self.process = self.__start__()
 
-    try:
-        process = subprocess.Popen(command, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_BREAKAWAY_FROM_JOB)
+    def __get_name__(self, path):
+        return os.path.basename(path)
 
-        return {
-            "process": process,
-            "timestamp": time.time(),
-            "detected": None
-        }
-    except WindowsError as error:
-        # Skip process monitoring if the file was blocked on startup for malware detection.
-        if error.winerror == 225:
-            return {
-                "process": None,
-                "timestamp": None,
-                "detected": True
-            }
-        else:
-            raise
+    def __update_detected__(self, state):
+        self.detected = state
+        return state
 
-def monitor(sample):
-    return_code = sample["process"].poll()
+    def __start__(self):
+        command = [self.filepath] + self.args
 
-    # Check for timeout
-    if time.time() - sample["timestamp"] > 2:
-        return False
-    elif return_code != None:
-        if return_code != 0:
-            return True
-        else:
-            return False
+        try:
+            return subprocess.Popen(command, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_BREAKAWAY_FROM_JOB)
+        except WindowsError as error:
+            # Skip process monitoring if the file was blocked on startup for malware detection.
+            if error.winerror == 225:
+                self.detected = True
+                return None
+            else:
+                raise
 
-    return None
+    def monitor(self):
+        return_code = self.process.poll()
+
+        if time.time() - self.timestamp > 2:
+            return self.__update_detected__(False)
+        elif return_code != None:
+            if return_code != 0:
+                return self.__update_detected__(True)
+            else:
+                return self.__update_detected__(False)
+
+        return self.__update_detected__(None)

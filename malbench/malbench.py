@@ -4,8 +4,7 @@ import messages
 import samples
 import metrics
 
-args = args.get_args()
-
+args = args.Args()
 message = messages.Message(args.verbose)
 
 if not args.no_banner:
@@ -18,40 +17,41 @@ keys = []
 # Start the malware samples.
 message.info("Loading malware...")
 for file in args.path:
-    sample = samples.run(file)
-    malware[file] = sample
+    sample = samples.Sample(file)
+    malware[sample.name] = sample
 
-    if not sample["detected"]:
-        keys.append(file)
+    if not sample.detected:
+        keys.append(sample.name)
     else:
-        message.good("Detected {}".format(file)) if args.verbose else message.good(file)
+        message.good("Detected {}".format(sample.name)) if args.verbose else message.good(sample.name)
 
     time.sleep(.2)
 
 # Monitor the malware processes for prevention.
 message.info("Monitoring malware for detection...")
 while len(keys):
-    for key in keys:
-        detected = samples.monitor(malware[key])
+    for name in keys:
+        sample = malware[name]
+        detected = sample.monitor()
 
         if detected != None:
-            malware[key]["detected"] = detected
-            keys.remove(key)
+            keys.remove(name)
 
             if detected:
-                message.good("Detected {}".format(key)) if args.verbose else message.good(key)
+                message.good("Detected {}".format(sample.name)) if args.verbose else message.good(sample.name)
             else:
-                message.bad("Failed to detect {}".format(key)) if args.verbose else message.bad(key)
+                message.bad("Failed to detect {}".format(sample.name)) if args.verbose else message.bad(sample.name)
     
     time.sleep(.2)
 
 # Calculate metrics and print results.
-detection_rate = metrics.detection_rate(malware)
+results = metrics.Metric(malware)
+detection_rate = results.detection_rate()
 
 if detection_rate == 100:
     print("\nDone. Detection rate: {}".format(message.green(str(detection_rate) + "%")))
 else:
-    failed = metrics.failed_samples(malware)
+    failed = results.failed_samples()
 
     print("\nDone. Detection rate: {} ({} samples failed):".format(message.red(str(detection_rate) + "%"), len(failed)))
 
