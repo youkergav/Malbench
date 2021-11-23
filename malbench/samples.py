@@ -3,13 +3,15 @@ import time
 import subprocess
 
 class Sample:
-    def __init__(self, filepath, args=[]):
+    def __init__(self, filepath, args=[], autorun=True):
         self.filepath = filepath
         self.args = args
         self.name = self.__get_name__(self.filepath)
         self.timestamp = time.time()
         self.detected = None
-        self.process = self.__start__()
+
+        if autorun:
+            self.process = self.start()
 
     def __get_name__(self, path):
         return os.path.basename(path)
@@ -18,7 +20,7 @@ class Sample:
         self.detected = state
         return state
 
-    def __start__(self):
+    def start(self):
         command = [self.filepath] + self.args
 
         try:

@@ -4,7 +4,6 @@ class Metric:
 
     def detection_rate(self):
         failed = 0
-        total = 0
 
         for sample in self.samples.values():
             if sample.detected == True:
