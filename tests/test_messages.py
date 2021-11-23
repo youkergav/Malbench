@@ -27,11 +27,12 @@ class TestMessages(unittest.TestCase):
 
     @patch("builtins.print")
     def test_info(self, mock_print):
+        # Test without verbose attribute off.
         self.message.info("info message")
         mock_print.asset_not_called()
 
+        # Test without verbose attribute on.
         self.message.verbose = True
-        
         self.message.info("info message")
         mock_print.assert_called_once_with("[\x1b[94m*\x1b[00m] info message")
 
