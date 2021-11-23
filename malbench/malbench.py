@@ -8,7 +8,7 @@ args = args.Args()
 message = messages.Message(args.verbose)
 
 if not args.no_banner:
-    message.banner()
+    message.banner("0.0.1")
 
 print("Running sample malware...\n")
 malware = {}

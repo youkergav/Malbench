@@ -1,8 +1,8 @@
 class Message:
-    def __init__(self, verbose):
+    def __init__(self, verbose=False):
         self.verbose = verbose
 
-    def banner(self):
+    def banner(self, version):
         print("\n" + self.blue("mMMMMMMMMMMMMMM") + "          ll bb                                  hh")
         print(self.blue("mM  MM.  MM.  M") + "          ll bb                                  hh")
         print(self.blue("mM  MMM  MMM  M") + " .aaaaaa. ll bbbbbbb. .eeeeee. nnnnnnn. .cccccc. hhhhhhh.")
@@ -10,7 +10,7 @@ class Message:
         print(self.blue("mM  MMM  MMM  M") + " aa.  .aa ll bb.  .bb ee.  ... nn    nn cc.  ... hh    hh")
         print(self.blue("mM  MMM  MMM  M") + " `aaaaaaa ll bbbbbbb' `eeeeee' nn    nn `cccccc' hh    hh")
         print(self.blue("mMMMMMMMMMMMMMM"))
-        print("                                                          v0.0.1\n")
+        print("                                                          v{}\n".format(version))
 
     def red(self, text):
         return "\033[91m{}\033[00m".format(text)
