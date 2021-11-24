@@ -2,7 +2,6 @@ import os
 import subprocess
 import time
 import unittest
-from unittest.mock import patch
 import malbench.samples as samples
 
 class TestSamples(unittest.TestCase):

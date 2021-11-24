@@ -1,6 +1,5 @@
 import os
 import unittest
-from unittest.mock import patch
 import malbench.args as args
 
 class TestArgs(unittest.TestCase):
