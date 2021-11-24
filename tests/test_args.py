@@ -19,6 +19,10 @@ class TestArgs(unittest.TestCase):
         ]
         self.assertListEqual(results.path, test)
 
+        # Test timeout flag
+        results = args.Args([self.folderpath + "calc.exe", "--timeout=5"])
+        self.assertEqual(results.timeout, 5)
+
         # Test verbose flag
         results = args.Args([self.folderpath + "calc.exe", "--verbose"])
         self.assertTrue(results.verbose)

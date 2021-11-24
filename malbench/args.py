@@ -8,6 +8,7 @@ class Args:
 
         parser.add_argument("path", type=Args.__get_path__, help="file or folder path to the malware samples")
         parser.add_argument("-v", "--verbose", action="store_true", help="prints additional info")
+        parser.add_argument("-t", "--timeout", type=int, default=2, help="seconds malware should live before failing (2 default)")
         parser.add_argument("--no-banner", action="store_true", help="hides the banner logo")
         
         if commands:

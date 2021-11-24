@@ -17,7 +17,7 @@ keys = []
 # Start the malware samples.
 message.info("Loading malware...")
 for file in args.path:
-    sample = samples.Sample(file)
+    sample = samples.Sample(file, timeout=args.timeout)
     malware[sample.name] = sample
 
     if not sample.detected:
