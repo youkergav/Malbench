@@ -5,20 +5,20 @@ class Metric:
     def detection_rate(self):
         failed = 0
 
-        for sample in self.samples.values():
+        for sample in self.samples:
             if sample.detected == True:
                 failed += 1
             
         if failed == 0:
             return 0
 
-        return (failed / len(self.samples.values())) * 100
+        return (failed / len(self.samples)) * 100
 
     def failed_samples(self):
         failed = []
 
-        for name, sample in self.samples.items():
+        for sample in self.samples:
             if sample.detected == False:
-                failed.append(name)
+                failed.append(sample.name)
 
         return failed

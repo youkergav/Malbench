@@ -45,7 +45,7 @@ while len(keys):
     time.sleep(.2)
 
 # Calculate metrics and print results.
-results = metrics.Metric(malware)
+results = metrics.Metric(malware.values())
 detection_rate = results.detection_rate()
 
 if detection_rate == 100:
