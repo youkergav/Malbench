@@ -8,4 +8,7 @@
         ".vscode/": true,
         "**/__pycache__/": true,
     },
+    "cSpell.words": [
+        "Malbench"
+    ],
 }
