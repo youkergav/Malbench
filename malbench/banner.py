@@ -27,7 +27,7 @@ class Banner:
     def _tag_line() -> str:
         lines = [
             "We're the reason antivirus software needs therapy.",
-            "Stressing out your antivirus since day one.",
+            "Stressing out your antivirus since 1/1/1970.",
             "Testing the untestable, one virus at a time.",
             "Chaos unleashed, solutions found.",
             "Your AV will need a vacation after this one!",
