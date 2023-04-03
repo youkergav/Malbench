@@ -4,9 +4,18 @@ from colorama import Fore
 
 
 class Banner:
+    """
+    Static class to print Banner.
+
+    This class provides methods for printing the Malbench banner including
+    a tagline and version number.
+    """
+
     @staticmethod
     def print() -> None:
         """
+        Function to print banner.
+
         Prints the Malbench banner, including a randomly selected tagline and the current version number.
         """
 

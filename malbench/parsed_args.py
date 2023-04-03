@@ -5,10 +5,20 @@ from typing import List
 
 
 class ParsedArgs():
+    """
+    Parses command line arguments.
+
+    Parses the command-line arguments using argparse and extracts relevant
+    arguments for use in the Malbench project.
+    """
+
     def __init__(self) -> None:
         """
-        Initializes a ParsedArgs object by parsing command-line arguments using argparse.
-        Extracts and stores relevant arguments for use in the Malbench project.
+        Constructor for ParseArgs.
+
+        Initializes a ParsedArgs object by parsing command-line arguments
+        using argparse. Extracts and stores relevant arguments for use in the
+         Malbench project.
         """
 
         parser = argparse.ArgumentParser()

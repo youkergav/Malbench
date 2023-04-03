@@ -3,6 +3,15 @@ from malbench.parsed_args import ParsedArgs
 
 
 def main():
+    """
+    Main entry point for application.
+
+    Main function that initializes a ParsedArgs object to parse command-line arguments
+    using argparse and extract relevant arguments for use in the Malbench project. If
+    the --no-banner flag is not used, it prints the Malbench banner. It then prints
+    the parsed arguments.
+    """
+
     args = ParsedArgs()
 
     if args.banner:
