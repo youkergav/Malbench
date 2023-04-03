@@ -4,7 +4,11 @@ from colorama import Fore
 
 class Banner:
     @staticmethod
-    def print():
+    def print() -> None:
+        """
+        Prints the Malbench banner, including a randomly selected tagline and the current version number.
+        """
+        
         print(f"{Fore.BLUE}mMMMMMMMMMMMMMM{Fore.RESET}          ll bb                                  hh")
         print(f"{Fore.BLUE}mM  MM.  MM.  M{Fore.RESET}          ll bb                                  hh")
         print(f"{Fore.BLUE}mM  MMM  MMM  M{Fore.RESET} .aaaaaa. ll bbbbbbb. .eeeeee. nnnnnnn. .cccccc. hhhhhhh.")
@@ -15,18 +19,18 @@ class Banner:
         print("{:60} v{}\n".format(Banner._tag_line(), Banner._version()))
 
     @staticmethod
-    def _version():
-        config = toml.load("pyproject.toml")
+    def _version(filename: str = "./pyproject.toml") -> str:
+        config = toml.load(filename)
         return config["tool"]["poetry"]["version"]
     
     @staticmethod
-    def _tag_line():
+    def _tag_line() -> str:
         lines = [
             "We're the reason antivirus software needs therapy.",
             "Stressing out your antivirus since day one.",
             "Testing the untestable, one virus at a time.",
             "Chaos unleashed, solutions found.",
-            "Your AV will need a lemonade after this!",
+            "Your AV will need a vacation after this one!",
             "Choose an option: Persuade [] Intimidate [X] Leave []",
             "We promise we won't break your computer... too much.",
             "Are you tired of your AV working? Try Malbench today!",
