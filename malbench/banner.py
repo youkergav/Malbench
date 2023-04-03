@@ -2,13 +2,14 @@ import toml
 import random
 from colorama import Fore
 
+
 class Banner:
     @staticmethod
     def print() -> None:
         """
         Prints the Malbench banner, including a randomly selected tagline and the current version number.
         """
-        
+
         print(f"{Fore.BLUE}mMMMMMMMMMMMMMM{Fore.RESET}          ll bb                                  hh")
         print(f"{Fore.BLUE}mM  MM.  MM.  M{Fore.RESET}          ll bb                                  hh")
         print(f"{Fore.BLUE}mM  MMM  MMM  M{Fore.RESET} .aaaaaa. ll bbbbbbb. .eeeeee. nnnnnnn. .cccccc. hhhhhhh.")
@@ -22,7 +23,7 @@ class Banner:
     def _version(filename: str = "./pyproject.toml") -> str:
         config = toml.load(filename)
         return config["tool"]["poetry"]["version"]
-    
+
     @staticmethod
     def _tag_line() -> str:
         lines = [

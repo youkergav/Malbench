@@ -3,6 +3,7 @@ import stat
 import argparse
 from typing import List
 
+
 class ParsedArgs():
     def __init__(self) -> None:
         """
@@ -14,9 +15,9 @@ class ParsedArgs():
 
         parser.add_argument("path", type=self._get_path, help="file or folder path to the malware samples")
         parser.add_argument("-v", "--verbose", action="store_true", help="prints additional info")
-        parser.add_argument("-t", "--timeout", type=int, default=2, help="seconds malware should live before failing (2 default)")
+        parser.add_argument("-t", "--timeout", type=int, default=2, help="malware TTL before failing (2 default)")
         parser.add_argument("--no-banner", action="store_true", help="hides the banner logo")
-            
+
         args = parser.parse_args()
 
         self.malware_samples = self._get_malware_samples(args.path)
@@ -30,7 +31,7 @@ class ParsedArgs():
 
         if not os.path.exists(path):
             raise FileNotFoundError(f"No file or folder found at '{path}'")
-        
+
         return path
 
     # Checks if the provided path is executable.
