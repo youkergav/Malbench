@@ -1,9 +1,11 @@
+from malbench.banner import Banner
 from malbench.parsed_args import ParsedArgs
 
 def main():
-    print("Welcome to the Malbench project!\n")
-
     args = ParsedArgs()
+
+    if args.banner:
+        Banner.print()
 
     print("Arguments are as follows:\n")
     print(f"Samples: {args.malware_samples}")
