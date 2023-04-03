@@ -14,6 +14,7 @@ toml = "^0.10.2"
 flake8 = "^6.0.0"
 autopep8 = "^2.0.2"
 flake8-docstrings = "^1.7.0"
+pdoc = "^13.1.0"
 
 [build-system]
 requires = ["poetry-core"]
