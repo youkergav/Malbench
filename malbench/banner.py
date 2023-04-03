@@ -16,7 +16,7 @@ class Banner:
         print(f"{Fore.BLUE}mM  MMM  MMM  M{Fore.RESET} aa.  .aa ll bb.  .bb ee.  ... nn    nn cc.  ... hh    hh")
         print(f"{Fore.BLUE}mM  MMM  MMM  M{Fore.RESET} `aaaaaaa ll bbbbbbb' `eeeeee' nn    nn `cccccc' hh    hh")
         print(f"{Fore.BLUE}mMMMMMMMMMMMMMM{Fore.RESET}")
-        print("{:60} v{}\n".format(Banner._tag_line(), Banner._version()))
+        print("  {:61} v{}\n".format(Banner._tag_line(), Banner._version()))
 
     @staticmethod
     def _version(filename: str = "./pyproject.toml") -> str:
