@@ -36,6 +36,8 @@ class Banner:
             "Are you tired of your AV working? Try Malbench today!",
             "You encountered a virus!  Run [] Hide [] Fight []",
             "Test malware, smash AV.",
+            "Time to go to plan B!",
+            "Kiss your computer goodbye!"
         ]
 
         return random.choice(lines)
