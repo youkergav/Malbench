@@ -37,7 +37,10 @@ class Banner:
             "You encountered a virus!  Run [] Hide [] Fight []",
             "Test malware, smash AV.",
             "Time to go to plan B!",
-            "Kiss your computer goodbye!"
+            "Kiss your computer goodbye!",
+            "\"I didn't run this program, did you run this program?!\"",
+            "Disabling algorithms...",
+            "Loading awesomeness [===============   ]"
         ]
 
         return random.choice(lines)
