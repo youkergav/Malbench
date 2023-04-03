@@ -40,7 +40,8 @@ class Banner:
             "Kiss your computer goodbye!",
             "\"I didn't run this program, did you run this program?!\"",
             "Disabling algorithms...",
-            "Loading awesomeness [===============   ]"
+            "Loading awesomeness [===============   ]",
+            "Loading pixels...? [===               ]"
         ]
 
         return random.choice(lines)
