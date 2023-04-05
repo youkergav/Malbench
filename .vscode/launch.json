@@ -1,0 +1,14 @@
+    {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Malbench",
+                "type": "python",
+                "request": "launch",
+                "module": "malbench",
+                "args": [
+                    "${workspaceFolder}/data/samples"
+                ]
+            }
+        ]
+    }
