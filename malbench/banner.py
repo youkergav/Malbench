@@ -19,22 +19,29 @@ class Banner:
         Prints the Malbench banner, including a randomly selected tagline and the current version number.
         """
 
-        print(f"{Fore.BLUE}mMMMMMMMMMMMMMM{Fore.RESET}          ll bb                                  hh")
-        print(f"{Fore.BLUE}mM  MM.  MM.  M{Fore.RESET}          ll bb                                  hh")
-        print(f"{Fore.BLUE}mM  MMM  MMM  M{Fore.RESET} .aaaaaa. ll bbbbbbb. .eeeeee. nnnnnnn. .cccccc. hhhhhhh.")
-        print(f"{Fore.BLUE}mM  MMM  MMM  M{Fore.RESET} aa'  `aa ll bb'  `bb eeeeeeee nn'  `nn cc'  `\"\" hh'  `hh")
-        print(f"{Fore.BLUE}mM  MMM  MMM  M{Fore.RESET} aa.  .aa ll bb.  .bb ee.  ... nn    nn cc.  ... hh    hh")
-        print(f"{Fore.BLUE}mM  MMM  MMM  M{Fore.RESET} `aaaaaaa ll bbbbbbb' `eeeeee' nn    nn `cccccc' hh    hh")
-        print(f"{Fore.BLUE}mMMMMMMMMMMMMMM{Fore.RESET}")
+        print(Banner._read_banner())
         print("  {:61} v{}\n".format(Banner._tag_line(), Banner._version()))
 
     @staticmethod
+    def _read_banner() -> str:
+        """Reads the banner for text file and colors it."""
+
+        with open("data/banner.txt", "r") as f:
+            banner = f.read().format(COLOR=Fore.CYAN, RESET=Fore.RESET)
+
+        return banner
+
+    @staticmethod
     def _version(filename: str = "./pyproject.toml") -> str:
+        """Extracts the version for the project config file."""
+
         config = toml.load(filename)
         return config["tool"]["poetry"]["version"]
 
     @staticmethod
     def _tag_line() -> str:
+        """Chooses a tag line at random."""
+
         lines = [
             "We're the reason antivirus software needs therapy.",
             "Stressing out your antivirus since 1/1/1970.",

@@ -1,0 +1,7 @@
+{COLOR}mMMMMMMMMMMMMMM{RESET}          ll bb                                  hh
+{COLOR}mM  .m.  .m.  M{RESET}          ll bb                                  hh
+{COLOR}mM  MMM  MMM  M{RESET} .aaaaaa. ll bbbbbbb. .eeeeee. nnnnnnn. .cccccc. hhhhhhh.
+{COLOR}mM  MMM  MMM  M{RESET} aa'  `aa ll bb'  `bb eeeeeeee nn'  `nn cc'  `"" hh'  `hh
+{COLOR}mM  MMM  MMM  M{RESET} aa.  .aa ll bb.  .bb ee.  ... nn    nn cc.  ... hh    hh
+{COLOR}mM  MMM  MMM  M{RESET} `aaaaaaa ll bbbbbbb' `eeeeee' nn    nn `cccccc' hh    hh
+{COLOR}mMMMMMMMMMMMMMM{RESET}
