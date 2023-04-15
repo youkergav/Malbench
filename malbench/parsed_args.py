@@ -50,19 +50,13 @@ class ParsedArgs():
         return path
 
     @staticmethod
-    def _is_executable(path: str) -> bool:
-        """Checks if the provided path is executable."""
-
-        return bool(stat.S_IXUSR & os.stat(path)[stat.ST_MODE])
-
-    @staticmethod
     def _get_malware_samples(path: str) -> List[str]:
         """Gets a list of malware samples by checking if the file(s) are executable."""
 
         files = []
 
         if os.path.isfile(path):
-            if ParsedArgs._is_executable(path):
+            if os.access(path, os.X_OK):
                 files.append(path)
             else:
                 raise argparse.ArgumentTypeError(f"'{path}' is not an executable file")
@@ -70,7 +64,7 @@ class ParsedArgs():
             for file in os.listdir(path):
                 file = os.path.join(path, file)
 
-                if ParsedArgs._is_executable(file):
+                if os.access(file, os.X_OK):
                     files.append(file)
 
         if not len(files):
