@@ -12,9 +12,10 @@ toml = "^0.10.2"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
-autopep8 = "^2.0.2"
 flake8-docstrings = "^1.7.0"
+autopep8 = "^2.0.2"
 pdoc = "^13.1.0"
+coverage = "^7.2.3"
 
 [build-system]
 requires = ["poetry-core"]
