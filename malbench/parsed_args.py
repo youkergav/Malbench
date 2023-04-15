@@ -1,7 +1,7 @@
 import os
 import stat
 import argparse
-from typing import List
+from typing import List, Dict
 
 
 class ParsedArgs():
@@ -13,7 +13,7 @@ class ParsedArgs():
     """
 
     @staticmethod
-    def parse() -> None:
+    def parse() -> Dict:
         """
         Method to parse arguments.
 
@@ -53,7 +53,7 @@ class ParsedArgs():
     def _is_executable(path: str) -> bool:
         """Checks if the provided path is executable."""
 
-        return stat.S_IXUSR & os.stat(path)[stat.ST_MODE]
+        return bool(stat.S_IXUSR & os.stat(path)[stat.ST_MODE])
 
     @staticmethod
     def _get_malware_samples(path: str) -> List[str]:

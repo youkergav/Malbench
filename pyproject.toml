@@ -16,6 +16,9 @@ flake8-docstrings = "^1.7.0"
 autopep8 = "^2.0.2"
 pdoc = "^13.1.0"
 coverage = "^7.2.3"
+mypy = "^1.2.0"
+types-toml = "^0.10.8.6"
+types-colorama = "^0.4.15.11"
 
 [build-system]
 requires = ["poetry-core"]
