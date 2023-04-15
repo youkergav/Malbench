@@ -1,5 +1,4 @@
 import os
-import stat
 import argparse
 from typing import List, Dict
 
