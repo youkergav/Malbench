@@ -5,9 +5,11 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
+        ".mypy_cache/": true,
         ".vscode/": true,
         ".venv/": true,
         "**/__pycache__/": true,
+        ".coverage": true
     },
     "cSpell.words": [
         "creationflags",

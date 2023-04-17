@@ -29,9 +29,9 @@ def main():
         malware = MalwareLauncher(malware_path, timeout=args["timeout"])
 
         if malware.run():
-            Printer.bad(malware.filepath)
+            Printer.bad(malware.name)
         else:
-            Printer.good(malware.filepath)
+            Printer.good(malware.name)
 
     print()
 
