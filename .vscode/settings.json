@@ -10,6 +10,7 @@
         "**/__pycache__/": true,
     },
     "cSpell.words": [
+        "creationflags",
         "Malbench"
     ],
     "python.formatting.provider": "autopep8",

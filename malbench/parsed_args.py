@@ -1,4 +1,5 @@
 import os
+import stat
 import argparse
 from typing import List, Dict
 
@@ -7,8 +8,21 @@ class ParsedArgs():
     """
     Parses command line arguments.
 
-    Parses the command-line arguments using argparse and extracts relevant
+    This class is responsible for parsing the command-line arguments using argparse and extracting relevant
     arguments for use in the Malbench project.
+
+    Attributes:
+        None
+
+    Methods:
+        parse(): Initializes a ParsedArgs object by parsing command-line arguments using argparse. Extracts and
+        stores relevant arguments for use in the Malbench project.
+
+    Example:
+        >>> parsed_args = ParsedArgs.parse()
+        >>> print(parsed_args)
+
+        {'malware_filepaths': ['samples/malware1'], 'timeout': 2, 'banner': True, 'verbose': False, 'warning': True}
     """
 
     @staticmethod
@@ -16,25 +30,34 @@ class ParsedArgs():
         """
         Method to parse arguments.
 
-        Initializes a ParsedArgs object by parsing command-line arguments
-        using argparse. Extracts and stores relevant arguments for use in the
-         Malbench project.
+        Parses the command line arguments using argparse and extracts and stores relevant
+        arguments for use in the Malbench project.
+
+        Returns:
+            A dictionary containing the following keys:
+            - malware_filepaths: A list of file paths to malware samples.
+            - timeout: The amount of time in seconds to allow a malware sample to run before killing it.
+            - banner: A boolean indicating whether to show the Malbench banner logo.
+            - verbose: A boolean indicating whether to print additional information.
+            - warning: A boolean indicating whether to prompt the user for confirmation before running Malbench.
         """
 
         parser = argparse.ArgumentParser()
 
         parser.add_argument("path", type=ParsedArgs._get_path, help="file or folder path to the malware samples")
         parser.add_argument("-v", "--verbose", action="store_true", help="prints additional info")
-        parser.add_argument("-t", "--timeout", type=int, default=2, help="malware TTL before failing (2 default)")
-        parser.add_argument("--no-banner", action="store_true", help="hides the banner logo")
+        parser.add_argument("-t", "--timeout", type=int, default=2, help="malware TTL before being marked as failure (2 default)")
+        parser.add_argument("-nB", "--no-banner", action="store_true", help="hides the banner logo")
+        parser.add_argument("-nW", "--no-warning", action="store_true", help="Does prompt for user confirmation before running")
 
         args = parser.parse_args()
 
         return {
-            "malware_samples": ParsedArgs._get_malware_samples(args.path),
+            "malware_filepaths": ParsedArgs._get_malware_filepaths(args.path),
             "timeout": args.timeout,
             "banner": not args.no_banner,
-            "verbose": args.verbose
+            "verbose": args.verbose,
+            "warning": not args.no_warning
         }
 
     @staticmethod
@@ -49,22 +72,28 @@ class ParsedArgs():
         return path
 
     @staticmethod
-    def _get_malware_samples(path: str) -> List[str]:
-        """Gets a list of malware samples by checking if the file(s) are executable."""
+    def _is_executable(path: str) -> bool:
+        """Determines if a path is executable or not."""
+
+        return bool(stat.S_IXUSR & os.stat(path)[stat.ST_MODE])
+
+    @staticmethod
+    def _get_malware_filepaths(path: str) -> List[str]:
+        """Gets a list of malware filepaths by checking if the file(s) are executable."""
 
         files = []
 
         if os.path.isfile(path):
-            if os.access(path, os.X_OK):
+            if ParsedArgs._is_executable(path):
                 files.append(path)
             else:
                 raise argparse.ArgumentTypeError(f"'{path}' is not an executable file")
         else:
             for file in os.listdir(path):
-                file = os.path.join(path, file)
+                filepath = os.path.join(path, file)
 
-                if os.access(file, os.X_OK):
-                    files.append(file)
+                if os.path.isfile(filepath) and ParsedArgs._is_executable(filepath):
+                    files.append(filepath)
 
         if not len(files):
             raise argparse.ArgumentTypeError(f"no executable files found at '{path}'")
