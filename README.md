@@ -1,7 +1,7 @@
 # Malbench
 Malbench is a command-line tool for testing and evaluating the effectiveness of malware detection tools - such as antivirus solutions. It does this by running a set of malware executables against a machine with the detection software installed, and checking if the executable is detected as malicious by that detection tool. Malbench is built to be modular and configurable, so it can be customized to meet the specific needs of different users and environments.
 
-## Why Test and Evaluate Malware Detection Tools with Malbench?
+### Why Test and Evaluate Malware Detection Tools with Malbench?
 Malware is a common threat to computer security and can cause significant damage if left undetected. Malware detection tools are an essential component of any computer security strategy, but they are not foolproof. Malware authors constantly develop new techniques to evade detection, and it is essential to regularly test and evaluate the effectiveness of detection tools to ensure that they are keeping up with these evolving threats.
 
 Malbench can be leveraged by test many known malware samples against by a detection software you wish to evaluate. This can be done by automatically launching multiple malware payloads at the system and seeing what samples were detected and which ones were evaded. With Malbench, users can customize their testing to meet their specific needs, selecting the malware samples they want to test and the duration.
