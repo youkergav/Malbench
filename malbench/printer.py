@@ -96,7 +96,12 @@ class Printer:
         """Chooses a tag line at random or based on holiday date."""
 
         today = date.today()
-        holiday = holidays.US(years=today.year).get(today, "").lower()
+        birthday = date(2023, 4, 1)
+
+        if today.month == birthday.month and today.day == birthday.day:
+            holiday = "birthday"
+        else:
+            holiday = holidays.US(years=today.year).get(today, "").lower()
 
         if "new year" in holiday:
             lines = [
@@ -104,6 +109,15 @@ class Printer:
                 "Time to start the New Year with some malware testing!",
                 "Let's kick off the New Year with a bang, shall we?",
                 "Ringing in the New Year with some malicious code!"
+            ]
+        elif "birthday" in holiday:
+            age = today.year - birthday.year
+
+            lines = [
+                f"Happy Birthday to me! Can you believe I am {age} years old?",
+                f"Hey! Todays my Birthday, I am {age} years old!",
+                f"Celebrating with some cake and malware! I am {age} years old.",
+                f":: Malbench turns {age} years old today ::"
             ]
         elif "independence day" in holiday:
             lines = [
