@@ -14,7 +14,8 @@
     "cSpell.words": [
         "creationflags",
         "docstrings",
-        "Malbench"
+        "Malbench",
+        "malwares"
     ],
     "python.formatting.provider": "autopep8",
     "python.linting.enabled": true,

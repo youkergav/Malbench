@@ -3,7 +3,7 @@ from sys import exit
 from colorama import Fore
 from malbench.printer import Printer
 from malbench.args import ArgParser
-from malbench.malware import MalwareLauncher
+from malbench.malware import MalwareLauncher, MalwareMetrics
 
 
 def main():
@@ -16,6 +16,7 @@ def main():
     the parsed arguments.
     """
 
+    # Parse arguments and load tool.
     args = ArgParser.parse()
 
     if args["banner"]:
@@ -24,16 +25,38 @@ def main():
     if args["warning"]:
         _confirm_continue()
 
-    print("Running malware samples...")
+    # Start the malware samples.
+    print("Loading malware...")
+    malwares = []
+
     for malware_path in args["malware_filepaths"]:
-        malware = MalwareLauncher(malware_path, timeout=args["timeout"])
+        malwares.append(MalwareLauncher(malware_path, timeout=args["timeout"]))
 
-        if malware.run():
-            Printer.bad(malware.name)
-        else:
+    # Monitor the malware processes for prevention.
+    print("Monitoring malware for detection...")
+    for malware in malwares:
+        malware.run()
+
+        if malware.detected:
             Printer.good(malware.name)
+        else:
+            Printer.bad(malware.name)
 
-    print()
+    # Calculate metrics and print results.
+    results = MalwareMetrics(malwares)
+    detection_rate = results.detection_rate()
+
+    if detection_rate == 1:
+        print(f"\nDone. Detection rate: {Fore.GREEN}100%{Fore.RESET}.")
+        print("No malware went undetected!\n")
+    else:
+        undetected_malware = results.failed_samples()
+
+        print(f"\nDone. Detection rate: {Fore.RED}{detection_rate:.0%}{Fore.RESET} ({len(undetected_malware)} failed):")
+
+        for malware in undetected_malware:
+            print(malware.name)
+        print("")
 
 
 def _confirm_continue() -> None:
