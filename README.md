@@ -12,7 +12,7 @@ Malbench can be leveraged by test many known malware samples against by a detect
 ## Installation
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/username/malbench.git
+    git clone https://github.com/youkergav/Malbench.git
     ```
 2.  Navigate to the project directory:
     ```bash
@@ -67,4 +67,4 @@ Pull Request Checklist:
 This project is licensed under the [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.en.html). See the [LICENSE.md](./LICENSE.md) file for details.
 
 ## Credits
-Malbench was created by [Gavin Youker](youkergav@gmail.com).
+Malbench was created by [Gavin Youker](mailto:youkergav@gmail.com).
