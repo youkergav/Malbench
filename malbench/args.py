@@ -4,7 +4,7 @@ import argparse
 from typing import List, Dict
 
 
-class ParsedArgs():
+class ArgParser():
     """
     Parses command line arguments.
 
@@ -44,7 +44,7 @@ class ParsedArgs():
 
         parser = argparse.ArgumentParser()
 
-        parser.add_argument("path", type=ParsedArgs._get_path, help="file or folder path to the malware samples")
+        parser.add_argument("path", type=ArgParser._get_path, help="file or folder path to the malware samples")
         parser.add_argument("-v", "--verbose", action="store_true", help="prints additional info")
         parser.add_argument("-t", "--timeout", type=int, default=2, help="malware TTL before being marked as failure (2 default)")
         parser.add_argument("-nB", "--no-banner", action="store_true", help="hides the banner logo")
@@ -53,7 +53,7 @@ class ParsedArgs():
         args = parser.parse_args()
 
         return {
-            "malware_filepaths": ParsedArgs._get_malware_filepaths(args.path),
+            "malware_filepaths": ArgParser._get_malware_filepaths(args.path),
             "timeout": args.timeout,
             "banner": not args.no_banner,
             "verbose": args.verbose,
@@ -84,7 +84,7 @@ class ParsedArgs():
         files = []
 
         if os.path.isfile(path):
-            if ParsedArgs._is_executable(path):
+            if ArgParser._is_executable(path):
                 files.append(path)
             else:
                 raise argparse.ArgumentTypeError(f"'{path}' is not an executable file")
@@ -92,7 +92,7 @@ class ParsedArgs():
             for file in os.listdir(path):
                 filepath = os.path.join(path, file)
 
-                if os.path.isfile(filepath) and ParsedArgs._is_executable(filepath):
+                if os.path.isfile(filepath) and ArgParser._is_executable(filepath):
                     files.append(filepath)
 
         if not len(files):

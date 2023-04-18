@@ -2,8 +2,8 @@ import textwrap
 from sys import exit
 from colorama import Fore
 from malbench.printer import Printer
-from malbench.parsed_args import ParsedArgs
-from malbench.malware_launcher import MalwareLauncher
+from malbench.args import ArgParser
+from malbench.malware import MalwareLauncher
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
     the parsed arguments.
     """
 
-    args = ParsedArgs.parse()
+    args = ArgParser.parse()
 
     if args["banner"]:
         Printer.banner()

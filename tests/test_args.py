@@ -2,15 +2,15 @@ import argparse
 import stat
 from unittest import TestCase
 from unittest.mock import patch
-from malbench.parsed_args import ParsedArgs
+from malbench.args import ArgParser
 
 
-class TestParsedArgs(TestCase):
+class TestArgParser(TestCase):
     @patch("os.path.exists", return_value=True)
     @patch("os.path.isfile", return_value=True)
     @patch("os.access", return_value=True)
     @patch("os.listdir", return_value=["executable_file"])
-    @patch("malbench.parsed_args.ParsedArgs._is_executable", return_value=True)
+    @patch("malbench.args.ArgParser._is_executable", return_value=True)
     def test_parse_file(self, mock_exec, mock_listdir, mock_stat, mock_isfile, mock_exists):
         # Mock run argparse and run our parse method.
         with patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(
@@ -20,7 +20,7 @@ class TestParsedArgs(TestCase):
             no_warning=True,
             verbose=True,
         )):
-            result = ParsedArgs.parse()
+            result = ArgParser.parse()
 
         # Define expected results.
         expected_malware_filepaths = ["/path/to/malware"]
@@ -39,7 +39,7 @@ class TestParsedArgs(TestCase):
     @patch("os.path.exists", return_value=True)
     @patch("os.path.isfile", side_effect=[False, True, True])
     @patch("os.listdir", return_value=["malware1", "malware2"])
-    @patch("malbench.parsed_args.ParsedArgs._is_executable", return_value=True)
+    @patch("malbench.args.ArgParser._is_executable", return_value=True)
     def test_parse_folder(self, mock_is_executable, mock_listdir, mock_isfile, mock_exists):
         # Mock run argparse and run our parse method.
         with patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(
@@ -49,7 +49,7 @@ class TestParsedArgs(TestCase):
             no_warning=True,
             verbose=False,
         )):
-            result = ParsedArgs.parse()
+            result = ArgParser.parse()
 
         # Define expected results.
         expected_malware_filepaths = ["/path/to/malware1", "/path/to/malware2"]
@@ -80,7 +80,7 @@ class TestParsedArgs(TestCase):
         )):
             # Assert raise with argparse error - no executables found.
             with self.assertRaises(argparse.ArgumentTypeError):
-                ParsedArgs.parse()
+                ArgParser.parse()
 
     @patch("os.path.exists", return_value=False)
     def test_parse_invalid_path(self, mock_exists):
@@ -94,4 +94,4 @@ class TestParsedArgs(TestCase):
         )):
             # Assert raise with argparse error - invalid path.
             with self.assertRaises(FileNotFoundError):
-                ParsedArgs.parse()
+                ArgParser.parse()
