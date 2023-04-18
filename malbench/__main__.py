@@ -41,10 +41,11 @@ def _confirm_continue() -> None:
 
     message = (f"{Fore.YELLOW}WARNING{Fore.RESET}: Malbench is designed to run malicious "
                "code that can harm your computer. Malbench should only be run on secure and isolated "
-               "environments. Do NOT run Malbench on a computer or network that contains sensitive "
-               "information or data that you are not willing to lose or become compromised. By "
-               "continuing, you acknowledge that you understand the risks and assume full responsibility "
-               "for any damage that may result from running Malbench.")
+               "environments by users who know what they are doing. Do NOT run Malbench on a computer "
+               "or network that contains sensitive information or data that you are not willing to lose "
+               "or become compromised. By continuing, you acknowledge and understand the risks of using "
+               "this software; and assume full responsibility for any damages that may result from running "
+               "Malbench.")
 
     print(textwrap.fill(message, width=80))
 
