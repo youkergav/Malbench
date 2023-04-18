@@ -24,3 +24,7 @@ types-colorama = "^0.4.15.11"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+malbench = "scripts.malbench:main"
+malbench-dev = "scripts.dev_tools:main"

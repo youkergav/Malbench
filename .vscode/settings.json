@@ -15,7 +15,9 @@
         "creationflags",
         "docstrings",
         "Malbench",
-        "malwares"
+        "malwares",
+        "pdoc",
+        "typecheck"
     ],
     "python.formatting.provider": "autopep8",
     "python.linting.enabled": true,
