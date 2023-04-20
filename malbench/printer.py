@@ -142,6 +142,9 @@ class Printer:
             ]
         else:
             lines = [
+                "Would you like a black hat or white hat today?"
+                "Good morning. The weather in Malibu is 72 degrees.",
+                "Wake up Neo..."
                 "We're the reason antivirus software needs therapy.",
                 "Stressing out your antivirus since 1/1/1970.",
                 "Testing the untestable, one virus at a time.",
