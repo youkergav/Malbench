@@ -26,5 +26,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-malbench = "scripts.malbench:main"
-malbench-dev = "scripts.dev_tools:main"
+malbench = "malbench.__main__:main"
