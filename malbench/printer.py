@@ -1,6 +1,6 @@
-import toml
 import random
 import holidays
+import pkg_resources
 from colorama import Fore
 from datetime import date
 
@@ -77,19 +77,17 @@ class Printer:
 
     @staticmethod
     def _read_banner() -> str:
-        """Reads the banner for text file and colors it."""
+        """Reads the banner from a text file and colors it."""
 
-        with open("data/banner.txt", "r") as f:
-            banner = f.read().format(COLOR=Fore.CYAN, RESET=Fore.RESET)
-
-        return banner
+        with pkg_resources.resource_stream("malbench", "../data/banner.txt") as f:
+            return f.read().decode("utf-8").format(COLOR=Fore.CYAN, RESET=Fore.RESET)
 
     @staticmethod
-    def _read_version(filename: str = "./pyproject.toml") -> str:
-        """Extracts the version for the project config file."""
+    def _read_version() -> str:
+        """Reads the version from a text file."""
 
-        config = toml.load(filename)
-        return config["tool"]["poetry"]["version"]
+        with pkg_resources.resource_stream("malbench", "../data/version.txt") as f:
+            return f.read().decode("utf-8")
 
     @staticmethod
     def _gen_tag_line() -> str:

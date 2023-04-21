@@ -4,6 +4,8 @@ version = "0.2.0"
 description = "A tool used for automating the analysis of malware samples against antivirus solutions."
 authors = ["Gavin Youker <youkergav@gmail.com>"]
 readme = "README.md"
+include = ["data/*"]
+exclude = ["data/samples"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
