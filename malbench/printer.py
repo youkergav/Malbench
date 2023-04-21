@@ -3,6 +3,7 @@ import holidays
 import pkg_resources
 from colorama import Fore
 from datetime import date
+from malbench.version import Version
 
 
 class Printer:
@@ -40,7 +41,7 @@ class Printer:
         """
 
         print(Printer._read_banner())
-        print("  {:61} v{}\n".format(Printer._gen_tag_line(), Printer._read_version()))
+        print("  {:61} v{}\n".format(Printer._gen_tag_line(), Version.version()))
 
     @staticmethod
     def good(message: str) -> None:
@@ -81,13 +82,6 @@ class Printer:
 
         with pkg_resources.resource_stream("malbench", "../data/banner.txt") as f:
             return f.read().decode("utf-8").format(COLOR=Fore.CYAN, RESET=Fore.RESET)
-
-    @staticmethod
-    def _read_version() -> str:
-        """Reads the version from a text file."""
-
-        with pkg_resources.resource_stream("malbench", "../data/version.txt") as f:
-            return f.read().decode("utf-8")
 
     @staticmethod
     def _gen_tag_line() -> str:

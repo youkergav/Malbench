@@ -1,6 +1,7 @@
 import os
 import stat
 import argparse
+from malbench.version import Version
 from typing import List, Dict
 
 
@@ -45,7 +46,7 @@ class ArgParser():
         parser = argparse.ArgumentParser()
 
         parser.add_argument("path", type=ArgParser._get_path, help="file or folder path to the malware samples")
-        parser.add_argument("-v", "--verbose", action="store_true", help="prints additional info")
+        parser.add_argument("-v", "--version", action="version", version=f"Malbench {Version.version()}")
         parser.add_argument("-t", "--timeout", type=int, default=2, help="malware TTL before being marked as failure (2 default)")
         parser.add_argument("-nB", "--no-banner", action="store_true", help="hides the banner logo")
         parser.add_argument("-nW", "--no-warning", action="store_true", help="Does prompt for user confirmation before running")
@@ -56,7 +57,6 @@ class ArgParser():
             "malware_filepaths": ArgParser._get_malware_filepaths(args.path),
             "timeout": args.timeout,
             "banner": not args.no_banner,
-            "verbose": args.verbose,
             "warning": not args.no_warning
         }
 
