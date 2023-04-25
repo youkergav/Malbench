@@ -19,7 +19,7 @@ class TestPrinter(TestCase):
         with open("data/banner.txt", "r") as f:
             expected_banner = f.read().format(COLOR=Fore.CYAN, RESET=Fore.RESET)
 
-        expected_subtitle = r"  .* v[1-9]\.[0-9]\.[0-9]"
+        expected_subtitle = r"  .* v[0-9]\.[0-9]\.[0-9]"
 
         # Perform assertions.
         self.assertEqual(results_banner, expected_banner)

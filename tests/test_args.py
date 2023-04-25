@@ -1,8 +1,8 @@
+import os
 import argparse
-import stat
 from unittest import TestCase
 from unittest.mock import patch
-from malbench.args import ArgParser
+from malbench.args import ArgParser, ArgPathNotExecutableError, ArgPathNotFoundError
 
 
 class TestArgParser(TestCase):
@@ -11,14 +11,15 @@ class TestArgParser(TestCase):
     @patch("os.access", return_value=True)
     @patch("os.listdir", return_value=["executable_file"])
     @patch("malbench.args.ArgParser._is_executable", return_value=True)
-    def test_parse_file(self, mock_exec, mock_listdir, mock_stat, mock_isfile, mock_exists):
+    @patch("dotenv.load_dotenv", return_value=None)
+    def test_parse_file(self, mock_load_dotenv, mock_exec, mock_listdir, mock_stat, mock_isfile, mock_exists):
         # Mock run argparse and run our parse method.
         with patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(
             path="/path/to/malware",
             timeout=5,
             no_banner=False,
             no_warning=True,
-            verbose=True,
+            dev=True,
         )):
             result = ArgParser.parse()
 
@@ -27,27 +28,29 @@ class TestArgParser(TestCase):
         expected_timeout = 5
         expected_banner = True
         expected_warning = False
-        expected_verbose = True
+        expected_dev = True
 
         # Perform assertions.
         self.assertEqual(result["malware_filepaths"], expected_malware_filepaths)
         self.assertEqual(result["timeout"], expected_timeout)
         self.assertEqual(result["banner"], expected_banner)
         self.assertEqual(result["warning"], expected_warning)
-        self.assertEqual(result["verbose"], expected_verbose)
+        self.assertEqual(result["dev"], expected_dev)
 
     @patch("os.path.exists", return_value=True)
     @patch("os.path.isfile", side_effect=[False, True, True])
     @patch("os.listdir", return_value=["malware1", "malware2"])
     @patch("malbench.args.ArgParser._is_executable", return_value=True)
-    def test_parse_folder(self, mock_is_executable, mock_listdir, mock_isfile, mock_exists):
+    @patch("dotenv.load_dotenv", return_value=None)
+    def test_parse_folder(self, mock_load_dotenv, mock_exec, mock_listdir, mock_isfile, mock_exists):
+
         # Mock run argparse and run our parse method.
         with patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(
             path="/path/to/",
             timeout=2,
             no_banner=False,
             no_warning=True,
-            verbose=False,
+            dev=True,
         )):
             result = ArgParser.parse()
 
@@ -56,42 +59,49 @@ class TestArgParser(TestCase):
         expected_timeout = 2
         expected_banner = True
         expected_warning = False
-        expected_verbose = False
+        expected_dev = True
 
         # Perform assertions.
         self.assertEqual(result["malware_filepaths"], expected_malware_filepaths)
         self.assertEqual(result["timeout"], expected_timeout)
         self.assertEqual(result["banner"], expected_banner)
         self.assertEqual(result["warning"], expected_warning)
-        self.assertEqual(result["verbose"], expected_verbose)
+        self.assertEqual(result["dev"], expected_dev)
 
     @patch("os.path.exists", return_value=True)
     @patch("os.path.isfile", return_value=False)
     @patch("os.access", return_value=False)
     @patch("os.listdir", return_value=["file1.txt", "file2.txt"])
-    def test_parse_no_executable_files(self, mock_listdir, mock_access, mock_isfile, mock_exists):
+    @patch("dotenv.load_dotenv", return_value=None)
+    def test_parse_no_executable_files(self, mock_load_dotenv, mock_listdir, mock_access, mock_isfile, mock_exists):
         # Mock run argparse and run our parse method.
         with patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(
             path="/path/to/",
             timeout=2,
             no_banner=False,
             no_warning=True,
-            verbose=False,
+            dev=True,
         )):
             # Assert raise with argparse error - no executables found.
-            with self.assertRaises(argparse.ArgumentTypeError):
+            with self.assertRaises(SystemExit) as cm:
                 ArgParser.parse()
 
+            self.assertEqual(cm.exception.code, 1)
+
     @patch("os.path.exists", return_value=False)
-    def test_parse_invalid_path(self, mock_exists):
+    @patch("os.listdir", return_value=[])
+    @patch("dotenv.load_dotenv", return_value=None)
+    def test_parse_invalid_path(self, mock_load_dotenv, mock_listdir, mock_exists):
         # Mock run argparse and run our parse method.
         with patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(
             path="/invalid/path",
             timeout=2,
             no_banner=False,
             no_warning=True,
-            verbose=False,
+            dev=True,
         )):
             # Assert raise with argparse error - invalid path.
-            with self.assertRaises(FileNotFoundError):
+            with self.assertRaises(SystemExit) as cm:
                 ArgParser.parse()
+
+            self.assertEqual(cm.exception.code, 1)

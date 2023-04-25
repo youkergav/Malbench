@@ -1,8 +1,37 @@
 import os
 import stat
+import dotenv
 import argparse
 from malbench.version import Version
 from typing import List, Dict
+
+
+class ArgPathNotFoundError(Exception):
+    """Raised when the provided path is not executable."""
+
+    def __init__(self, path):
+        """Initializes an instance of ArgPathNotFoundError."""
+
+        self.path = path
+
+    def __str__(self):
+        """Returns a string describing the error."""
+
+        return f"error: no file or folder found at '{self.path}'"
+
+
+class ArgPathNotExecutableError(Exception):
+    """Raised when the provided path is not executable."""
+
+    def __init__(self, path):
+        """Initializes an instance of ArgPathNotExecutableError."""
+
+        self.path = path
+
+    def __str__(self):
+        """Returns a string describing the error."""
+
+        return f"error: no executable files found at '{self.path}'"
 
 
 class ArgParser():
@@ -45,20 +74,29 @@ class ArgParser():
 
         parser = argparse.ArgumentParser()
 
-        parser.add_argument("path", type=ArgParser._get_path, help="file or folder path to the malware samples")
+        parser.add_argument("path", type=ArgParser._get_path, help="file or folder path of malware executables")
         parser.add_argument("-v", "--version", action="version", version=f"Malbench {Version.version()}")
         parser.add_argument("-t", "--timeout", type=int, default=2, help="malware TTL before being marked as failure (2 default)")
         parser.add_argument("-nB", "--no-banner", action="store_true", help="hides the banner logo")
-        parser.add_argument("-nW", "--no-warning", action="store_true", help="Does prompt for user confirmation before running")
+        parser.add_argument("-nW", "--no-warning", action="store_true", help="bypasses user confirmation before running")
+        parser.add_argument("-d", "--dev", action="store_true", help="enabled stack tracing")
 
-        args = parser.parse_args()
+        try:
+            args = parser.parse_args()
+            dotenv.load_dotenv()
 
-        return {
-            "malware_filepaths": ArgParser._get_malware_filepaths(args.path),
-            "timeout": args.timeout,
-            "banner": not args.no_banner,
-            "warning": not args.no_warning
-        }
+            return {
+                "malware_filepaths": ArgParser._get_malware_filepaths(args.path),
+                "timeout": args.timeout,
+                "banner": not args.no_banner,
+                "warning": not args.no_warning,
+                "dev": args.dev or os.getenv("MALBENCH_DEV", "false").lower() in ["true", "1"]
+            }
+        except (ArgPathNotFoundError, ArgPathNotExecutableError) as e:
+            parser.print_usage()
+            print(f"{parser.prog}: {e}")
+
+            exit(1)
 
     @staticmethod
     def _get_path(path: str) -> str:
@@ -67,7 +105,7 @@ class ArgParser():
         path = os.path.abspath(path)
 
         if not os.path.exists(path):
-            raise FileNotFoundError(f"No file or folder found at '{path}'")
+            raise ArgPathNotFoundError(path)
 
         return path
 
@@ -87,7 +125,7 @@ class ArgParser():
             if ArgParser._is_executable(path):
                 files.append(path)
             else:
-                raise argparse.ArgumentTypeError(f"'{path}' is not an executable file")
+                raise ArgPathNotExecutableError(path)
         else:
             for file in os.listdir(path):
                 filepath = os.path.join(path, file)
@@ -96,6 +134,6 @@ class ArgParser():
                     files.append(filepath)
 
         if not len(files):
-            raise argparse.ArgumentTypeError(f"no executable files found at '{path}'")
+            raise ArgPathNotExecutableError(path)
 
         return files

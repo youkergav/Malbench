@@ -1,5 +1,5 @@
-import textwrap
 from sys import exit
+from textwrap import fill
 from colorama import Fore
 from malbench.printer import Printer
 from malbench.args import ArgParser
@@ -16,47 +16,55 @@ def main():
     the parsed arguments.
     """
 
-    # Parse arguments and load tool.
-    args = ArgParser.parse()
+    try:
+        # Parse arguments and load tool.
+        args = ArgParser.parse()
 
-    if args["banner"]:
-        Printer.banner()
+        if args["banner"]:
+            Printer.banner()
 
-    if args["warning"]:
-        _confirm_continue()
+        if args["warning"]:
+            _confirm_continue()
 
-    # Start the malware samples.
-    print("Loading malware...")
-    malwares = []
+        # Start the malware samples.
+        print("Loading malware...")
+        malwares = []
 
-    for malware_path in args["malware_filepaths"]:
-        malwares.append(MalwareLauncher(malware_path, timeout=args["timeout"]))
+        for malware_path in args["malware_filepaths"]:
+            malwares.append(MalwareLauncher(malware_path, timeout=args["timeout"]))
 
-    # Monitor the malware processes for prevention.
-    print("Monitoring malware for detection...")
-    for malware in malwares:
-        malware.run()
+        # Monitor the malware processes for prevention.
+        print("Monitoring malware for detection...")
+        for malware in malwares:
+            malware.run()
 
-        if malware.detected:
-            Printer.good(malware.name)
+            if malware.detected:
+                Printer.good(malware.name)
+            else:
+                Printer.bad(malware.name)
+
+        # Calculate metrics and print results.
+        results = MalwareMetrics(malwares)
+        detection_rate = results.detection_rate()
+
+        if detection_rate == 1:
+            print(f"\nDone. Detection rate: {Fore.GREEN}100%{Fore.RESET}.")
+            print("No malware went undetected!\n")
         else:
-            Printer.bad(malware.name)
+            undetected_malware = results.failed_samples()
 
-    # Calculate metrics and print results.
-    results = MalwareMetrics(malwares)
-    detection_rate = results.detection_rate()
+            print(f"\nDone. Detection rate: {Fore.RED}{detection_rate:.0%}{Fore.RESET} ({len(undetected_malware)} failed):")
 
-    if detection_rate == 1:
-        print(f"\nDone. Detection rate: {Fore.GREEN}100%{Fore.RESET}.")
-        print("No malware went undetected!\n")
-    else:
-        undetected_malware = results.failed_samples()
-
-        print(f"\nDone. Detection rate: {Fore.RED}{detection_rate:.0%}{Fore.RESET} ({len(undetected_malware)} failed):")
-
-        for malware in undetected_malware:
-            print(malware.name)
-        print("")
+            for malware in undetected_malware:
+                print(malware.name)
+            print("")
+    except KeyboardInterrupt:
+        print("User cancelled. We were so close to greatness...")
+    except Exception as e:
+        if args["dev"]:
+            raise e
+        else:
+            print(f"{Fore.RED}error{Fore.RESET}: an unexpected error has occurred")
 
 
 def _confirm_continue() -> None:
@@ -70,7 +78,7 @@ def _confirm_continue() -> None:
                "this software; and assume full responsibility for any damages that may result from running "
                "Malbench.")
 
-    print(textwrap.fill(message, width=80))
+    print(fill(message, width=80))
 
     while True:
         default = "n"

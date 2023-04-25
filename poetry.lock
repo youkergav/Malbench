@@ -442,6 +442,21 @@ files = [
 six = ">=1.5"
 
 [[package]]
+name = "python-dotenv"
+version = "1.0.0"
+description = "Read key-value pairs from a .env file and set them as environment variables"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "python-dotenv-1.0.0.tar.gz", hash = "sha256:a8df96034aae6d2d50a4ebe8216326c61c3eb64836776504fcca410e5937a3ba"},
+    {file = "python_dotenv-1.0.0-py3-none-any.whl", hash = "sha256:f5971a9226b701070a4bf2c38c89e5a3f0d64de8debda981d1db98583009122a"},
+]
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -502,6 +517,18 @@ files = [
 ]
 
 [[package]]
+name = "types-setuptools"
+version = "67.7.0.0"
+description = "Typing stubs for setuptools"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-setuptools-67.7.0.0.tar.gz", hash = "sha256:f59b03c786510176c7601578d84d5e6c58e985de331f08036b2fe008408a63c1"},
+    {file = "types_setuptools-67.7.0.0-py3-none-any.whl", hash = "sha256:02ee794d41c282ecfc99e09d8115ca4c3c4395a9747d1a35fa4a6f243d7585e6"},
+]
+
+[[package]]
 name = "types-toml"
 version = "0.10.8.6"
 description = "Typing stubs for toml"
@@ -540,4 +567,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "1097452ad86e5bd6d29f4bcff711c12900c68ecf148269e2538f2d0592cbd8a2"
+content-hash = "da477226a3859a9cad8b0cef41bd3510e3e9bac6b73ed290359053c23feec21f"
