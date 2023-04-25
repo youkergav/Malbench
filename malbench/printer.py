@@ -1,5 +1,6 @@
 import random
 import holidays
+import textwrap
 import pkg_resources
 from colorama import Fore
 from datetime import date
@@ -42,6 +43,15 @@ class Printer:
 
         print(Printer._read_banner())
         print("  {:61} v{}\n".format(Printer._gen_tag_line(), Version.version()))
+
+    @staticmethod
+    def disclaimer() -> None:
+        """Reads the disclaimer from a text file and formats it."""
+
+        with pkg_resources.resource_stream("malbench", "../data/disclaimer.txt") as f:
+            message = f.read().decode("utf-8").format(COLOR=Fore.YELLOW, RESET=Fore.RESET)
+
+        print(textwrap.fill(message, width=80))
 
     @staticmethod
     def good(message: str) -> None:

@@ -1,5 +1,4 @@
 from sys import exit
-from textwrap import fill
 from colorama import Fore
 from malbench.printer import Printer
 from malbench.args import ArgParser
@@ -70,15 +69,7 @@ def main():
 def _confirm_continue() -> None:
     """Function to confirm an action and return true or false."""
 
-    message = (f"{Fore.YELLOW}WARNING{Fore.RESET}: Malbench is designed to run malicious "
-               "code that can harm your computer. Malbench should only be run on secure and isolated "
-               "environments by users who know what they are doing. Do NOT run Malbench on a computer "
-               "or network that contains sensitive information or data that you are not willing to lose "
-               "or become compromised. By continuing, you acknowledge and understand the risks of using "
-               "this software; and assume full responsibility for any damages that may result from running "
-               "Malbench.")
-
-    print(fill(message, width=80))
+    Printer.disclaimer()
 
     while True:
         default = "n"
