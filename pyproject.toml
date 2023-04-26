@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "malbench"
-version = "0.2.0"
+version = "0.3.0"
 description = "A tool used for automating the analysis of malware samples against antivirus solutions."
 authors = ["Gavin Youker <youkergav@gmail.com>"]
 readme = "README.md"
