@@ -55,20 +55,21 @@ By default, Malbench will show a banner when it starts, and will prompt you to c
 
 Malware samples are run one by one, and Malbench will wait for each sample to be stopped by the detection software or reach the specified 2 second timeout before moving on to the next sample. This timeout can be changed with the `--timeout` flag. If a sample completes successfully, Malbench will print a red message with a `[-]` prefix, indicating it wasn't stopped by the detection software. If a sample has to be forcibly terminated by the detection software, Malbench will print a green message with a `[+]` prefix, indicating is was successfully detected and stopped.
 
-A full list of arguments to use with Malbench are below.
+A full list of arguments to use with Malbench are below. This can be displayed with `--help`.
 ```bash
-usage: malbench [-h] [-v] [-t TIMEOUT] [-nB] [-nW] path
+usage: malbench [-h] [-v] [-t TIMEOUT] [-nB] [-nW] [-d] path
 
 positional arguments:
-path file or folder path to the malware samples
+  path                  file or folder path of malware executables
 
-optional arguments:
--h, --help show this help message and exit
--v, --verbose prints additional info
--t TIMEOUT, --timeout TIMEOUT
-malware TTL before being marked as failure (2 default)
--nB, --no-banner hides the banner logo
--nW, --no-warning Does prompt for user confirmation before running
+options:
+  -h, --help            show this help message and exit
+  -v, --version         show program's version number and exit
+  -t TIMEOUT, --timeout TIMEOUT
+                        malware TTL before being marked as failure (2 default)
+  -nB, --no-banner      hides the banner logo
+  -nW, --no-warning     bypasses user confirmation before running
+  -d, --dev             enables stack tracing
 ```
 
 ## Contributing

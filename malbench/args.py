@@ -79,7 +79,7 @@ class ArgParser():
         parser.add_argument("-t", "--timeout", type=int, default=2, help="malware TTL before being marked as failure (2 default)")
         parser.add_argument("-nB", "--no-banner", action="store_true", help="hides the banner logo")
         parser.add_argument("-nW", "--no-warning", action="store_true", help="bypasses user confirmation before running")
-        parser.add_argument("-d", "--dev", action="store_true", help="enabled stack tracing")
+        parser.add_argument("-d", "--dev", action="store_true", help="enables stack tracing")
 
         try:
             args = parser.parse_args()
