@@ -1,6 +1,9 @@
 # Malbench
 Malbench is a command-line tool for testing and evaluating the effectiveness of malware detection tools (such as antivirus solutions). It does this by running a set of malware samples, and checking if the malware is flagged by the detection tool we are evaluating. Malbench is built to be modular and configurable, so it can be customized to meet the specific needs of different users and environments.
 
+## About
+
+
 ### Disclaimer 
 **:warning: WARNING**: Malbench is designed to run malicious code that can harm your computer. Malbench should only be run on secure and isolated environments by users who know what they are doing. Do **not** run Malbench on a computer or network that contains sensitive information or data that you are not willing to lose or become compromised. By downloading and/or using this software, you acknowledge and understand the risks of using this software; and assume full responsibility for any damages that may result from running Malbench.
 
@@ -12,7 +15,22 @@ Malware detection tools are an essential component of any computer security stra
 With all the different features and algorithms of modern antivirus solutions, it can be hard to find practical and objective results on what-all they defend against. Malbench can be leveraged to bulk-test known malware samples against antivirus solutions to deliver real and practical results. This is done by automatically launching multiple malware payloads on a system and seeing what samples are detected and which ones were evaded. With Malbench, users can customize their testing to meet their specific needs, selecting the malware samples they want to run, and the duration of a test.
 
 ## Installation
-1.  Clone the repository:
+There are two ways to install Malbench, depending on whether you are a user or a developer.
+
+### For Users
+To install Malbench for general use, follow these simple steps:
+
+1.  Ensure that the following is installed on your system: [Python 3.9](https://www.python.org/downloads/)+, and [PIP](https://pypi.org/project/pip/) (included with most Python installations).
+2.  Install Malbench via pip by running the following command:
+    ```bash
+    pip install malbench
+    ```
+
+### For Developers
+If you are a developer who wants to contribute to Malbench or modify the source code, you will need to follow a different set of installation steps: 
+
+1.  Ensure the following is installed on your system: [Python 3.9](https://www.python.org/downloads/)+, [PIP](https://pypi.org/project/pip/) (included with most Python installations), [Git](https://git-scm.com/downloads), [Poetry](https://python-poetry.org/docs/), and an IDE of your choice ([VSCode](https://code.visualstudio.com/download) recommended).
+1.  Clone (or fork) the Malbench repository using Git:
     ```bash
     git clone https://github.com/youkergav/Malbench.git
     ```
@@ -20,12 +38,10 @@ With all the different features and algorithms of modern antivirus solutions, it
     ```bash
     cd malbench
     ```
-3.  Install the required dependencies using [Poetry](https://python-poetry.org/):
+3.  Install the required dependencies using Poetry:
     ```bash
     poetry install
     ```
-
-    If you don't have Poetry installed, you can install it using the instructions on the official [Poetry website](https://python-poetry.org/docs/#installation).
 
 ## Usage
 To use Malbench, simply run the following command inside your virtual environment:
