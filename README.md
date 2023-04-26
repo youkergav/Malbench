@@ -30,18 +30,20 @@ To install Malbench for general use, follow these simple steps:
 If you are a developer who wants to contribute to Malbench or modify the source code, you will need to follow a different set of installation steps: 
 
 1.  Ensure the following is installed on your system: [Python 3.9](https://www.python.org/downloads/)+, [PIP](https://pypi.org/project/pip/) (included with most Python installations), [Git](https://git-scm.com/downloads), [Poetry](https://python-poetry.org/docs/), and an IDE of your choice ([VSCode](https://code.visualstudio.com/download) recommended).
-1.  Clone (or fork) the Malbench repository using Git:
+2.  Clone (or fork) the Malbench repository using Git:
     ```bash
     git clone https://github.com/youkergav/Malbench.git
     ```
-2.  Navigate to the project directory:
+3.  Navigate to the project directory:
     ```bash
     cd malbench
     ```
-3.  Install the required dependencies using Poetry:
+4.  Install the required dependencies using Poetry:
     ```bash
     poetry install
     ```
+    *Note: Please ensure the your PATH is configured for poetry*
+5. If using VSCode: First ensure the [Python extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.python) is installed. Open the `Malbench` folder in VSCode and ensure the Python interpreter is set to use the local poetry `.venv` (you may need to reload VSCode after this).
 
 ## Usage
 To use Malbench, simply run the following command inside your virtual environment:
