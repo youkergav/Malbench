@@ -1,6 +1,5 @@
 from sys import exit
-from colorama import Fore
-from malbench.printer import Printer
+from malbench.message import Message
 from malbench.args import ArgParser
 from malbench.malware import MalwareLauncher, MalwareMetrics
 
@@ -18,11 +17,13 @@ def main():
     try:
         # Parse arguments and load tool.
         args = ArgParser.parse()
+        message = Message(args["color"])
 
         if args["banner"]:
-            Printer.banner()
+            print(message.banner())
 
         if args["warning"]:
+            print(message.disclaimer())
             _confirm_continue()
 
         # Start the malware samples.
@@ -38,38 +39,37 @@ def main():
             malware.run()
 
             if malware.detected:
-                Printer.good(malware.name)
+                print(message.good(malware.name))
             else:
-                Printer.bad(malware.name)
+                print(message.bad(malware.name))
 
         # Calculate metrics and print results.
         results = MalwareMetrics(malwares)
         detection_rate = results.detection_rate()
 
         if detection_rate == 1:
-            print(f"\nDone. Detection rate: {Fore.GREEN}100%{Fore.RESET}.")
+            print(f"\nDone. Detection rate:  {message.green('100%')}.")
             print("No malware went undetected!\n")
         else:
+            detection_rate_percent = f"{round(detection_rate * 100)}%"
             undetected_malware = results.failed_samples()
 
-            print(f"\nDone. Detection rate: {Fore.RED}{detection_rate:.0%}{Fore.RESET} ({len(undetected_malware)} failed):")
+            print(f"\nDone. Detection rate: { message.red(detection_rate_percent)} ({len(undetected_malware)} failed):")
 
             for malware in undetected_malware:
                 print(malware.name)
             print("")
     except KeyboardInterrupt:
-        print("User cancelled. We were so close to greatness...")
+        print("User :cancelled. We were so close to greatness...")
     except Exception as e:
         if args["dev"]:
             raise e
         else:
-            print(f"{Fore.RED}error{Fore.RESET}: an unexpected error has occurred")
+            print(f"{message.red('error')}: an unexpected error has occurred")
 
 
 def _confirm_continue() -> None:
     """Function to confirm an action and return true or false."""
-
-    Printer.disclaimer()
 
     while True:
         default = "n"

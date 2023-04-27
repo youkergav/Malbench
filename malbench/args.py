@@ -47,12 +47,6 @@ class ArgParser():
     Methods:
         parse(): Initializes a ParsedArgs object by parsing command-line arguments using argparse. Extracts and
         stores relevant arguments for use in the Malbench project.
-
-    Example:
-        >>> parsed_args = ParsedArgs.parse()
-        >>> print(parsed_args)
-
-        {'malware_filepaths': ['samples/malware1'], 'timeout': 2, 'banner': True, 'verbose': False, 'warning': True}
     """
 
     @staticmethod
@@ -77,6 +71,7 @@ class ArgParser():
         parser.add_argument("path", type=ArgParser._get_path, help="file or folder path of malware executables")
         parser.add_argument("-v", "--version", action="version", version=f"Malbench {Version.version()}")
         parser.add_argument("-t", "--timeout", type=int, default=2, help="malware TTL before being marked as failure (2 default)")
+        parser.add_argument("-nC", "--no-color", action="store_true", help="disables colored output")
         parser.add_argument("-nB", "--no-banner", action="store_true", help="hides the banner logo")
         parser.add_argument("-nW", "--no-warning", action="store_true", help="bypasses user confirmation before running")
         parser.add_argument("-d", "--dev", action="store_true", help="enables stack tracing")
@@ -88,6 +83,7 @@ class ArgParser():
             return {
                 "malware_filepaths": ArgParser._get_malware_filepaths(args.path),
                 "timeout": args.timeout,
+                "color": not args.no_color,
                 "banner": not args.no_banner,
                 "warning": not args.no_warning,
                 "dev": args.dev or os.getenv("MALBENCH_DEV", "false").lower() in ["true", "1"]

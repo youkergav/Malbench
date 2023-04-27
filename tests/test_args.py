@@ -2,7 +2,7 @@ import os
 import argparse
 from unittest import TestCase
 from unittest.mock import patch
-from malbench.args import ArgParser, ArgPathNotExecutableError, ArgPathNotFoundError
+from malbench.args import ArgParser
 
 
 class TestArgParser(TestCase):
@@ -17,6 +17,7 @@ class TestArgParser(TestCase):
         with patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(
             path="/path/to/malware",
             timeout=5,
+            no_color=False,
             no_banner=False,
             no_warning=True,
             dev=True,
@@ -26,6 +27,7 @@ class TestArgParser(TestCase):
         # Define expected results.
         expected_malware_filepaths = ["/path/to/malware"]
         expected_timeout = 5
+        expected_color = True
         expected_banner = True
         expected_warning = False
         expected_dev = True
@@ -33,6 +35,7 @@ class TestArgParser(TestCase):
         # Perform assertions.
         self.assertEqual(result["malware_filepaths"], expected_malware_filepaths)
         self.assertEqual(result["timeout"], expected_timeout)
+        self.assertEqual(result["color"], expected_banner)
         self.assertEqual(result["banner"], expected_banner)
         self.assertEqual(result["warning"], expected_warning)
         self.assertEqual(result["dev"], expected_dev)
@@ -48,6 +51,7 @@ class TestArgParser(TestCase):
         with patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(
             path="/path/to/",
             timeout=2,
+            no_color=False,
             no_banner=False,
             no_warning=True,
             dev=True,
@@ -57,6 +61,7 @@ class TestArgParser(TestCase):
         # Define expected results.
         expected_malware_filepaths = ["/path/to/malware1", "/path/to/malware2"]
         expected_timeout = 2
+        expected_color = True
         expected_banner = True
         expected_warning = False
         expected_dev = True
@@ -64,6 +69,7 @@ class TestArgParser(TestCase):
         # Perform assertions.
         self.assertEqual(result["malware_filepaths"], expected_malware_filepaths)
         self.assertEqual(result["timeout"], expected_timeout)
+        self.assertEqual(result["color"], expected_banner)
         self.assertEqual(result["banner"], expected_banner)
         self.assertEqual(result["warning"], expected_warning)
         self.assertEqual(result["dev"], expected_dev)
