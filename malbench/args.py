@@ -69,12 +69,13 @@ class ArgParser():
         parser = argparse.ArgumentParser()
 
         parser.add_argument("path", type=ArgParser._get_path, help="file or folder path of malware executables")
-        parser.add_argument("-v", "--version", action="version", version=f"Malbench {Version.version()}")
         parser.add_argument("-t", "--timeout", type=int, default=2, help="malware TTL before being marked as failure (2 default)")
         parser.add_argument("-nC", "--no-color", action="store_true", help="disables colored output")
         parser.add_argument("-nB", "--no-banner", action="store_true", help="hides the banner logo")
         parser.add_argument("-nW", "--no-warning", action="store_true", help="bypasses user confirmation before running")
         parser.add_argument("-d", "--dev", action="store_true", help="enables stack tracing")
+        parser.add_argument("-v", "--version", action="version",
+                            version=f"Malbench {Version.version()}", help="shows malbench version number and exits")
 
         try:
             args = parser.parse_args()

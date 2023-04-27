@@ -66,9 +66,10 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  -v, --version         show program's version number and exit
+  -v, --version         shows malbench version number and exits
   -t TIMEOUT, --timeout TIMEOUT
                         malware TTL before being marked as failure (2 default)
+  -nC, --no-color       disables colored output
   -nB, --no-banner      hides the banner logo
   -nW, --no-warning     bypasses user confirmation before running
   -d, --dev             enables stack tracing
