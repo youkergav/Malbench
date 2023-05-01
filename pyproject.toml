@@ -9,9 +9,6 @@ license = "LICENSE"
 include = ["data/*"]
 exclude = ["data/samples"]
 
-[tool.poetry.files]
-"LICENSE.md" = "LICENSE.md"
-
 [tool.poetry.dependencies]
 python = "^3.10"
 colorama = "^0.4.6"
