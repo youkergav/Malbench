@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "malbench"
-version = "0.3.2"
-description = "A tool used for automating the analysis of malware samples against antivirus solutions."
+version = "0.3.3"
+description = "A tool used to benchmark antivirus solutions against real-world malware samples."
 repository = "https://github.com/youkergav/Malbench"
 authors = ["Gavin Youker <youkergav@gmail.com>"]
 readme = "README.md"
-license = "LICENSE"
+license = "GPL-3.0-only"
 include = ["data/*"]
 exclude = ["data/samples"]
 
