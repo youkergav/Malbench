@@ -5,9 +5,9 @@ Malbench is a command-line tool for testing and evaluating the effectiveness of 
 
 
 ### Disclaimer 
-**:warning: WARNING**: Malbench is designed to run malicious code that can harm your computer. Malbench should only be run on secure and isolated environments by users who know what they are doing. Do **not** run Malbench on a computer or network that contains sensitive information or data that you are not willing to lose or become compromised. By downloading and/or using this software, you acknowledge and understand the risks of using this software; and assume full responsibility for any damages that may result from running Malbench.
+**⚠ WARNING**: Malbench is designed to run malicious code that can harm your computer. Malbench should only be run on secure and isolated environments by users who know what they are doing. Do **not** run Malbench on a computer or network that contains sensitive information or data that you are not willing to lose or become compromised. By downloading and/or using this software, you acknowledge and understand the risks of using this software; and assume full responsibility for any damages that may result from running Malbench.
 
-**:information_source: NOTE**: It is important to note that Malbench does not include any malware samples. Therefore, users are expected to provide their own samples for testing purposes. This is to ensure that Malbench is used responsibly and ethically; and that users have control over the types of malware being tested.
+**ℹ️ NOTE**: It is important to note that Malbench does not include any malware samples. Therefore, users are expected to provide their own samples for testing purposes. This is to ensure that Malbench is used responsibly and ethically; and that users have control over the types of malware being tested.
 
 ### Why Use Malbench?
 Malware detection tools are an essential component of any computer security strategy, but they are not foolproof. New techniques and methods are constantly being developed to evade detection. It is important to regularly test and evaluate the effectiveness of detection tools to ensure that we are keeping up with these evolving threats.
@@ -43,7 +43,12 @@ If you are a developer who wants to contribute to Malbench or modify the source 
     poetry install
     ```
     *Note: Please ensure the your PATH is configured for poetry*
-5. If using VSCode: First ensure the [Python extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.python) is installed. Open the `Malbench` folder in VSCode and ensure the Python interpreter is set to use the local poetry `.venv` (you may need to reload VSCode after this).
+5. Launch the virtual environment using one of the following methods:
+    - For general use, the virtual environment can be opened with:
+      ```
+      poetry shell
+      ```
+    - Alternatively, the virtual environment can be opened in VSCode. First ensure the [Python extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.python) is installed. Then, open the `Malbench` folder in VSCode and ensure the Python interpreter is set to use the local poetry `.venv` (you may need to reload VSCode after this).
 
 ## Usage
 To use Malbench, simply run the following command inside your virtual environment:
