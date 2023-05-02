@@ -2,17 +2,24 @@
 Malbench is a command-line tool for testing and evaluating the effectiveness of malware detection tools (such as antivirus solutions). It does this by running a set of malware samples, and checking if the malware is flagged by the detection tool we are evaluating. Malbench is built to be modular and configurable, so it can be customized to meet the specific needs of different users and environments.
 
 ## About
-
-
 ### Disclaimer 
-**⚠ WARNING**: Malbench is designed to run malicious code that can harm your computer. Malbench should only be run on secure and isolated environments by users who know what they are doing. Do **not** run Malbench on a computer or network that contains sensitive information or data that you are not willing to lose or become compromised. By downloading and/or using this software, you acknowledge and understand the risks of using this software; and assume full responsibility for any damages that may result from running Malbench.
+**⚠ WARNING**: Malbench is a tool for testing antivirus software against real-world malware samples. While it does not contain any malware on its own, it is designed to run malware samples provided by the user. Use Malbench only in secure and isolated environments that you are authorized in doing so. Do **not** use Malbench on a computer or network that contains sensitive information or data that you are not willing to lose and/or become compromised. By using Malbench, you acknowledge the risks and assume full responsibility for any damages that may result.
 
-**ℹ️ NOTE**: It is important to note that Malbench does not include any malware samples. Therefore, users are expected to provide their own samples for testing purposes. This is to ensure that Malbench is used responsibly and ethically; and that users have control over the types of malware being tested.
+**ℹ️ NOTE**: As stated above: *Malbench does not come with any malicious code installed*. It is the user's responsibility to provide their own samples for testing purposes. This is to ensure that Malbench is used responsibly and ethically, and that users have control over the types of malware being tested.
 
-### Why Use Malbench?
+### Why Use Malbench
 Malware detection tools are an essential component of any computer security strategy, but they are not foolproof. New techniques and methods are constantly being developed to evade detection. It is important to regularly test and evaluate the effectiveness of detection tools to ensure that we are keeping up with these evolving threats.
 
 With all the different features and algorithms of modern antivirus solutions, it can be hard to find practical and objective results on what-all they defend against. Malbench can be leveraged to bulk-test known malware samples against antivirus solutions to deliver real and practical results. This is done by automatically launching multiple malware payloads on a system and seeing what samples are detected and which ones were evaded. With Malbench, users can customize their testing to meet their specific needs, selecting the malware samples they want to run, and the duration of a test.
+
+### How Antivirus is Benchmarked
+Malbench launches each malware sample selected by the user and monitors its execution. If the sample completes without error, it is flagged as `UNDETECTED`. If the sample is terminated with an error code, it is flagged as `DETECTED`, indicating that it was killed by the antivirus solution. If the sample is still running after a designated time (defaults to 2 seconds), Malbench forcibly kills the program and flags it as `DETECTED`, as the antivirus solution did not detect it in time.
+
+After each sample is run, Malbench displays the detection rate. The detection rate is a percentage representing the amount of samples the antivirus successfully defended against. 
+
+$$
+\text{Detection rate} = \frac{\text{Number of samples flagged as detected}}{\text{Total number of samples}} \times 100\%
+$$
 
 ## Installation
 There are two ways to install Malbench, depending on whether you are a user or a developer.

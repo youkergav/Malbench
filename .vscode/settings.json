@@ -18,7 +18,9 @@
         "Malbench",
         "malwares",
         "pdoc",
-        "typecheck"
+        "typecheck",
+        "venv",
+        "Youker"
     ],
     "python.formatting.provider": "autopep8",
     "python.linting.enabled": true,
