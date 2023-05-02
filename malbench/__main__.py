@@ -22,6 +22,9 @@ def main():
         if args["banner"]:
             print(message.banner())
 
+        if args["dev"]:
+            print(f"Running in {message.blue('DEV')} mode.\n")
+
         if args["warning"]:
             print(message.disclaimer())
             _confirm_continue()
