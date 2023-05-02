@@ -55,7 +55,7 @@ def main():
             print("No malware went undetected!\n")
         else:
             detection_rate_percent = f"{round(detection_rate * 100)}%"
-            undetected_malware = results.failed_samples()
+            undetected_malware = results.undetected_samples()
 
             print(f"\nDone. Detection rate: { message.red(detection_rate_percent)} ({len(undetected_malware)} failed):")
 
