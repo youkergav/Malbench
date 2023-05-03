@@ -47,7 +47,7 @@ class Message():
             A string containing the banner.
         """
 
-        with pkg_resources.resource_stream("malbench", "../data/banner.txt") as f:
+        with pkg_resources.resource_stream("malbench", "data/banner.txt") as f:
             banner = f.read().decode("utf-8").replace("\r", "").format(
                 COLOR=Fore.BLUE if self.color else "",
                 RESET=Fore.RESET if self.color else ""
@@ -63,7 +63,7 @@ class Message():
             A formatted string containing the disclaimer.
         """
 
-        with pkg_resources.resource_stream("malbench", "../data/disclaimer.txt") as f:
+        with pkg_resources.resource_stream("malbench", "data/disclaimer.txt") as f:
             message = f.read().decode("utf-8").replace("\r", "").format(
                 COLOR=Fore.YELLOW if self.color else "",
                 RESET=Fore.RESET if self.color else ""

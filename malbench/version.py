@@ -13,5 +13,5 @@ class Version:
             The version number as a string.
         """
 
-        with pkg_resources.resource_stream("malbench", "../data/version.txt") as f:
+        with pkg_resources.resource_stream("malbench", "data/version.txt") as f:
             return f.read().decode("utf-8")

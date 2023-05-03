@@ -7,7 +7,7 @@
                 "request": "launch",
                 "module": "malbench",
                 "args": [
-                    "${workspaceFolder}/data/samples",
+                    "${workspaceFolder}/tests/data/samples",
                     "--no-warning"
                 ]
             }

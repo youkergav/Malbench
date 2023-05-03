@@ -19,7 +19,7 @@ class TestMessage(TestCase):
         results_subtitle = results[-1]
 
         # Define expected results.
-        with open("data/banner.txt", "r") as f:
+        with open("malbench/data/banner.txt", "r") as f:
             expected_banner = f.read().format(COLOR=Fore.BLUE, RESET=Fore.RESET)
 
         expected_subtitle = r"  .* v[0-9]\.[0-9]\.[0-9]"
@@ -32,7 +32,7 @@ class TestMessage(TestCase):
         result = self.message.disclaimer()  # Run the disclaimer method.
 
         # Define expected results.
-        with open("data/disclaimer.txt", "r") as f:
+        with open("malbench/data/disclaimer.txt", "r") as f:
             expected = textwrap.fill(f.read().format(COLOR=Fore.YELLOW, RESET=Fore.RESET), width=80)
 
         self.assertEqual(result, expected)  # Perform assertion.

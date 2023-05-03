@@ -8,7 +8,7 @@ class TestVersion(TestCase):
         result = Version.version()  # Run the disclaimer method.
 
         # Define expected results.
-        with open("data/version.txt", "r") as f:
+        with open("malbench/data/version.txt", "r") as f:
             expected = f.read()
 
         self.assertEqual(result, expected)  # Perform assertion.

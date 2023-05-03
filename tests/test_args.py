@@ -1,5 +1,6 @@
-import os
+import sys
 import argparse
+from io import StringIO
 from unittest import TestCase
 from unittest.mock import patch
 from malbench.args import ArgParser
@@ -80,6 +81,10 @@ class TestArgParser(TestCase):
     @patch("os.listdir", return_value=["file1.txt", "file2.txt"])
     @patch("dotenv.load_dotenv", return_value=None)
     def test_parse_no_executable_files(self, mock_load_dotenv, mock_listdir, mock_access, mock_isfile, mock_exists):
+        # Redirect stdout to a StringIO object to hide print statements from test.
+        captured_output = StringIO()
+        sys.stdout = captured_output
+
         # Mock run argparse and run our parse method.
         with patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(
             path="/path/to/",
@@ -98,6 +103,10 @@ class TestArgParser(TestCase):
     @patch("os.listdir", return_value=[])
     @patch("dotenv.load_dotenv", return_value=None)
     def test_parse_invalid_path(self, mock_load_dotenv, mock_listdir, mock_exists):
+        # Redirect stdout to a StringIO object to hide print statements from test.
+        captured_output = StringIO()
+        sys.stdout = captured_output
+
         # Mock run argparse and run our parse method.
         with patch("argparse.ArgumentParser.parse_args", return_value=argparse.Namespace(
             path="/invalid/path",
