@@ -6,8 +6,6 @@ repository = "https://github.com/youkergav/Malbench"
 authors = ["Gavin Youker <youkergav@gmail.com>"]
 readme = "README.md"
 license = "GPL-3.0-only"
-include = ["data/*"]
-exclude = ["data/samples"]
 
 [tool.poetry.dependencies]
 python = "^3.8.1"
