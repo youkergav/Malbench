@@ -93,7 +93,7 @@ Contributions to Malbench are always welcome! If you'd like to contribute, pleas
 
 Pull Request Checklist:
 - New code follows similar coding styles of the existing codebase.
-- New code is backed up by unit tests, with a minimum of 70% coverage.
+- New code is backed up by unit tests, with a minimum of 80% coverage.
 - New code passes all linting and strict-typing rules.
 - New code is well documented with docstrings and compiled in `/docs`.
 - Updates are made to the README when applicable.
