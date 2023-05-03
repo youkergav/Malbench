@@ -28,7 +28,7 @@ There are two ways to install Malbench, depending on whether you are a user or a
 ### For Users
 To install Malbench for general use, follow these simple steps:
 
-1.  Ensure that the following is installed on your system: [Python 3.9](https://www.python.org/downloads/)+, and [PIP](https://pypi.org/project/pip/) (included with most Python installations).
+1.  Ensure that the following is installed on your system: [Python 3.8.1+](https://www.python.org/downloads/), and [PIP](https://pypi.org/project/pip/) (included with most Python installations).
 2.  Install Malbench via pip by running the following command:
     ```bash
     pip install malbench
@@ -37,7 +37,7 @@ To install Malbench for general use, follow these simple steps:
 ### For Developers
 If you are a developer who wants to contribute to Malbench or modify the source code, you will need to follow a different set of installation steps: 
 
-1.  Ensure the following is installed on your system: [Python 3.9](https://www.python.org/downloads/)+, [PIP](https://pypi.org/project/pip/) (included with most Python installations), [Git](https://git-scm.com/downloads), [Poetry](https://python-poetry.org/docs/), and an IDE of your choice ([VSCode](https://code.visualstudio.com/download) recommended).
+1.  Ensure the following is installed on your system: [Python 3.8.1+](https://www.python.org/downloads/), [PIP](https://pypi.org/project/pip/) (included with most Python installations), [Git](https://git-scm.com/downloads), [Poetry](https://python-poetry.org/docs/), and an IDE of your choice ([VSCode](https://code.visualstudio.com/download) recommended).
 2.  Clone (or fork) the Malbench repository using Git:
     ```bash
     git clone https://github.com/youkergav/Malbench.git
