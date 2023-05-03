@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "malbench"
-version = "0.3.4"
+version = "0.3.5"
 description = "A tool used to benchmark antivirus solutions against real-world malware samples."
 repository = "https://github.com/youkergav/Malbench"
 authors = ["Gavin Youker <youkergav@gmail.com>"]

@@ -1,6 +1,6 @@
 # Malbench
 Malbench is a command-line tool for testing and evaluating the effectiveness of malware detection tools (such as antivirus solutions). It does this by running a set of malware samples, and checking if the malware is flagged by the detection tool we are evaluating. Malbench is built to be modular and configurable, so it can be customized to meet the specific needs of different users and environments.
-![Malbench Terminal Demo](data/demo.gif)
+![Malbench Terminal Demo](https://raw.githubusercontent.com/youkergav/Malbench/master/data/demo.gif)
 
 ## About
 ### Disclaimer 
