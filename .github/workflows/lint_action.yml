@@ -38,7 +38,7 @@ jobs:
         if ! git diff --quiet; then
             git add .
             git commit -m 'Linting and formatting'
-            git push
+            git push origin HEAD:${GITHUB_REF#refs/heads/}
         fi
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
