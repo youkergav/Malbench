@@ -41,4 +41,4 @@ jobs:
             git push origin HEAD:${GITHUB_REF#refs/heads/}
         fi
       env:
-        GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
