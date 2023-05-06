@@ -35,8 +35,9 @@ jobs:
       run: |
         git config --global user.name 'GitHub Action'
         git config --global user.email 'github-action@github.com'
+        git checkout ${{ github.head_ref }}
+        git pull origin ${{ github.head_ref }}
         if ! git diff --quiet; then
-            git checkout -b $GITHUB_HEAD_REF
             git add .
             git commit -m 'Linting and formatting'
             git push origin HEAD
