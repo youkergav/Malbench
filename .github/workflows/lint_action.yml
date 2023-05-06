@@ -36,9 +36,10 @@ jobs:
         git config --global user.name 'GitHub Action'
         git config --global user.email 'github-action@github.com'
         if ! git diff --quiet; then
+            gh pr checkout ${{ github.event.pull_request.number }}
             git add .
             git commit -m 'Linting and formatting'
             git push
         fi
       env:
-        GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
