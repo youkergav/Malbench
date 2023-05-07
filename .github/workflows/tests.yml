@@ -1,9 +1,9 @@
-name: Security Check
+name: Unit Testing
 
 on: [pull_request]
 
 jobs:
-  security:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,5 +22,8 @@ jobs:
     - name: Install virtual environment
       run: poetry install
 
-    - name: Check for vulnerabilities
-      run: poetry check
+    - name: Run tests and coverage
+      run: poetry run coverage run -m unittest discover -s tests
+
+    - name: Get coverage report
+      run: poetry run coverage report --fail-under=80

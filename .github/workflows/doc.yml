@@ -1,9 +1,9 @@
-name: Lint and Format
+name: Documenting
 
 on: [pull_request]
 
 jobs:
-  lint:
+  doc:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,14 +22,8 @@ jobs:
     - name: Install virtual environment
       run: poetry install
 
-    - name: Perform linting
-      run: poetry run flake8 malbench
-
-    - name: Perform type checking
-      run: poetry run mypy malbench
-
-    - name: Perform formatting
-      run: poetry run autopep8 --in-place --recursive malbench
+    - name: Generate docstring docs
+      run: poetry run pdoc -o docs malbench
 
     - name: Commit changes
       run: |
@@ -38,7 +32,7 @@ jobs:
         if ! git diff --quiet; then
             gh pr checkout ${{ github.event.pull_request.number }}
             git add .
-            git commit -m 'Linting and formatting'
+            git commit -m 'Documentation'
             git push
         fi
       env:
