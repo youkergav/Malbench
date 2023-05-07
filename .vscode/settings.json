@@ -18,8 +18,10 @@
         "Malbench",
         "malwares",
         "pdoc",
+        "Pythonic",
         "typecheck",
         "venv",
+        "vulncheck",
         "Youker"
     ],
     "python.formatting.provider": "autopep8",

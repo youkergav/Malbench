@@ -23,7 +23,7 @@ jobs:
       run: poetry install
 
     - name: Generate docstring docs
-      run: poetry run pdoc -o docs malbench
+      run: poetry run poe doc
 
     - name: Commit changes
       run: |

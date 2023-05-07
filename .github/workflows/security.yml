@@ -23,4 +23,4 @@ jobs:
       run: poetry install
 
     - name: Check for vulnerabilities
-      run: poetry check
+      run: poetry run poe vulncheck

@@ -23,7 +23,7 @@ jobs:
       run: poetry install
 
     - name: Run tests and coverage
-      run: poetry run coverage run -m unittest discover -s tests
+      run: poetry run poe test
 
     - name: Get coverage report
-      run: poetry run coverage report --fail-under=80
+      run: poetry run poe coverage
