@@ -24,6 +24,7 @@ coverage = "^7.2.3"
 mypy = "^1.2.0"
 types-toml = "^0.10.8.6"
 types-colorama = "^0.4.15.11"
+poethepoet = "^0.20.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -31,3 +32,12 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 malbench = "malbench.__main__:main"
+
+[tool.poe.tasks]
+typecheck = "mypy malbench"
+lint = "flake8 malbench"
+format = "autopep8 --in-place --recursive malbench"
+test = "coverage run -m unittest discover -s tests"
+coverage = "coverage report --fail-under=80"
+doc = "pdoc -o docs malbench"
+vulncheck = "poetry check"

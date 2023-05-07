@@ -23,13 +23,13 @@ jobs:
       run: poetry install
       
     - name: Perform linting
-      run: poetry run flake8 malbench
+      run: poe lint
 
     - name: Perform type checking
-      run: poetry run mypy malbench
+      run: poe typecheck
 
     - name: Perform formatting
-      run: poetry run autopep8 --in-place --recursive malbench
+      run: poe format
 
     - name: Commit changes
       run: |
