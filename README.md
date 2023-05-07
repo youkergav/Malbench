@@ -23,9 +23,6 @@ $$
 $$
 
 ## Installation
-There are two ways to install Malbench, depending on whether you are a user or a developer.
-
-### For Users
 To install Malbench for general use, follow these simple steps:
 
 1.  Ensure that the following is installed on your system: [Python 3.8.1+](https://www.python.org/downloads/), and [PIP](https://pypi.org/project/pip/) (included with most Python installations).
@@ -33,30 +30,12 @@ To install Malbench for general use, follow these simple steps:
     ```bash
     pip install malbench
     ```
+3.  Confirm that Malbench has been installed:
+    ```
+    malbench --version
+    ```
 
-### For Developers
-If you are a developer who wants to contribute to Malbench or modify the source code, you will need to follow a different set of installation steps: 
-
-1.  Ensure the following is installed on your system: [Python 3.8.1+](https://www.python.org/downloads/), [PIP](https://pypi.org/project/pip/) (included with most Python installations), [Git](https://git-scm.com/downloads), [Poetry](https://python-poetry.org/docs/), and an IDE of your choice ([VSCode](https://code.visualstudio.com/download) recommended).
-2.  Clone (or fork) the Malbench repository using Git:
-    ```bash
-    git clone https://github.com/youkergav/Malbench.git
-    ```
-3.  Navigate to the project directory:
-    ```bash
-    cd malbench
-    ```
-4.  Install the required dependencies using Poetry:
-    ```bash
-    poetry install
-    ```
-    *Note: Please ensure the your PATH is configured for poetry*
-5. Launch the virtual environment using one of the following methods:
-    - For general use, the virtual environment can be opened with:
-      ```
-      poetry shell
-      ```
-    - Alternatively, the virtual environment can be opened in VSCode. First ensure the [Python extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.python) is installed. Then, open the `Malbench` folder in VSCode and ensure the Python interpreter is set to use the local poetry `.venv` (you may need to reload VSCode after this).
+*If you are interested in installing Malbench for development, take a look at the [For Developers](#for-developers) installation section.*
 
 ## Usage
 To use Malbench, simply run the following command inside your virtual environment:
@@ -89,14 +68,7 @@ options:
 ```
 
 ## Contributing
-Contributions to Malbench are always welcome! If you'd like to contribute, please fork the repository and create a new branch for your changes. Once you've made your changes, create a pull request and we'll review your changes. *For major changes, please open an issue first to discuss what you would like to change.*
-
-Pull Request Checklist:
-- New code follows similar coding styles of the existing codebase.
-- New code is backed up by unit tests, with a minimum of 80% coverage.
-- New code passes all linting and strict-typing rules.
-- New code is well documented with docstrings and compiled in `/docs`.
-- Updates are made to the README when applicable.
+We welcome contributions to Malbench! If you'd like to contribute, please read our [contributing guidelines](./CONTRIBUTING.md) to get started. We appreciate your help in making Malbench better!
 
 ## License
 This project is licensed under the [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.en.html). See the [LICENSE.md](./LICENSE.md) file for details.

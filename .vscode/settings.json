@@ -18,6 +18,7 @@
         "Malbench",
         "malwares",
         "pdoc",
+        "Pythonic",
         "typecheck",
         "venv",
         "vulncheck",
