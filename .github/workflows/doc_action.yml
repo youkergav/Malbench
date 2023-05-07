@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Setup Environment
-      uses: ./.github/actions/environment.yml
+      uses: ./.github/workflows/environment.yml
 
     - name: Generate docstring docs
       run: poetry run pdoc -o docs malbench
