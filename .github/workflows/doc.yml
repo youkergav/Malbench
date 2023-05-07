@@ -20,12 +20,10 @@ jobs:
         echo "$HOME/.poetry/bin" >> $GITHUB_PATH
 
     - name: Install virtual environment
-      run: |
-        poetry install
-        poetry shell
+      run: poetry install
 
     - name: Generate docstring docs
-      run: poe doc
+      run: poetry run poe doc
 
     - name: Commit changes
       run: |

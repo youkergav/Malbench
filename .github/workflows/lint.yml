@@ -20,18 +20,16 @@ jobs:
         echo "$HOME/.poetry/bin" >> $GITHUB_PATH
 
     - name: Install virtual environment
-      run: |
-        poetry install
-        poetry shell
+      run: poetry install
       
     - name: Perform linting
-      run: poe lint
+      run: poetry run poe lint
 
     - name: Perform type checking
-      run: poe typecheck
+      run: poetry run poe typecheck
 
     - name: Perform formatting
-      run: poe format
+      run: poetry run poe format
 
     - name: Commit changes
       run: |
