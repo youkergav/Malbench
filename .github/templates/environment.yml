@@ -1,7 +1,11 @@
+name: Setup Environment
+
+on: [pull_request]
+
 jobs:
   environment:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
