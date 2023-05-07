@@ -47,7 +47,7 @@ class TestMessage(TestCase):
         result = self.message.bad("The bad ending")  # Run the bad method.
         expected = f"{Fore.RED}[-]{Fore.RESET} The bad ending"  # Define expected result.
 
-        self.assertEqual(result, "")  # Perform assertions.
+        self.assertEqual(result, expected)  # Perform assertions.
 
     def test_red(self):
         result = self.message.red("A red message")  # Run the red method.
