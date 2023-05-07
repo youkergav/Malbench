@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Setup Environment
-      includes: ./.github/templates/environment.yml
+      uses: ./.github/templates/environment.yml
       
     - name: Perform linting
       run: poetry run flake8 malbench
