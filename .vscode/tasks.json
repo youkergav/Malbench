@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Type Check",
+            "command": "poetry run mypy malbench"
+        },
+        {
+            "type": "shell",
+            "label": "Lint",
+            "command": "poetry run flake8 malbench"
+        },
+        {
+            "type": "shell",
+            "label": "Format",
+            "command": "poetry run autopep8 --in-place --recursive malbench"
+        },
+        {
+            "type": "shell",
+            "label": "Test",
+            "command": "poetry run coverage run -m unittest discover -s tests"
+        },
+        {
+            "type": "shell",
+            "label": "Coverage",
+            "command": "poetry run coverage report --fail-under=80"
+        },
+        {
+            "type": "shell",
+            "label": "Docs",
+            "command": "poetry run pdoc -o docs malbench"
+        },
+        {
+            "type": "shell",
+            "label": "Vulnerability Check",
+            "command": "poetry check"
+        }
+    ]
+}
