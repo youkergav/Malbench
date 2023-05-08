@@ -35,7 +35,7 @@ To install Malbench for general use, follow these simple steps:
     malbench --version
     ```
 
-*If you are interested in installing Malbench for development, take a look at the [For Developers](#for-developers) installation section.*
+*If you are interested in installing Malbench for development, take a look at the [CONTRIBUTING.md](./CONTRIBUTING.md) file.*
 
 ## Usage
 To use Malbench, simply run the following command inside your virtual environment:
