@@ -144,7 +144,7 @@ poe coverage
 ```
 
 ### Documentation
-We use `pdoc` for generating Python code documentation.
+We use `pdoc` for generating Python code documentation. Documentation can be found at [https://youkergav.github.io/Malbench/malbench.html](https://youkergav.github.io/Malbench/malbench.html).
 
 For public methods and classes, it's recommended to use docstrings that follow the PEP 257 style guide. For private methods, it's generally not necessary to include docstrings that follow the PEP 257 style guide. However, it can be useful to include a one-line summary that describes the method's purpose
 
