@@ -102,7 +102,7 @@ Malbench utilizes [PoeThePoet](https://github.com/nat-n/poethepoet) for managing
 The Malbench project follows the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide for Python code. We use the `autopep8` tool to automatically format code to follow these conventions.
 
 The configuration is as follows:
-```toml
+```
 [pycodestyle]
 exclude = tests/, scripts/, .venv, .git, init.py, docs/source/conf.py, dist, pycache
 max-line-length = 130
@@ -117,7 +117,7 @@ poe format
 The Malbench project uses `flake8` for linting Python code.
 
 The configuration is as follows:
-```toml
+```
 [flake8]
 exclude = tests/*, scripts/*, .venv, .git, __init__.py, docs/source/conf.py, dist, __pycache__
 max_line_length = 130
