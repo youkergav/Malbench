@@ -68,7 +68,7 @@ options:
 ```
 
 ## Contributing
-We welcome contributions to Malbench! If you'd like to contribute, please read our [contributing guidelines](./CONTRIBUTING.md) to get started. We appreciate your help in making Malbench better!
+Contributions to Malbench are welcomed! If you'd like to contribute, please read our [CONTRIBUTING.md](./CONTRIBUTING.md) to get started.
 
 ## License
 This project is licensed under the [GNU General Public License](https://www.gnu.org/licenses/gpl-3.0.en.html). See the [LICENSE.md](./LICENSE.md) file for details.
