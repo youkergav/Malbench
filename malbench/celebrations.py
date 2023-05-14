@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import date, timedelta
 
 
 class Celebrations:
@@ -25,56 +25,56 @@ class Celebrations:
         self.year = year
 
     @property
-    def new_years(self) -> datetime:
+    def new_years(self) -> date:
         """
         Gets the date of New Year's Day for the given year.
 
         Returns:
-            A datetime object representing the date of New Year's Day.
+            A date object representing the date of New Year's Day.
         """
 
-        return datetime(self.year, 1, 1)
+        return date(self.year, 1, 1)
 
     @property
-    def valentines_day(self) -> datetime:
+    def valentines_day(self) -> date:
         """
         Gets the date of Valentine's Day Day for the given year.
 
         Returns:
-            A datetime object representing the date of Valentine's Day Day.
+            A date object representing the date of Valentine's Day Day.
         """
 
-        return datetime(self.year, 2, 14)
+        return date(self.year, 2, 14)
 
     @property
-    def st_patricks_day(self) -> datetime:
+    def st_patricks_day(self) -> date:
         """
         Gets the date of St. Patrick's Day for the given year.
 
         Returns:
-            A datetime object representing the date of St. Patrick's Day.
+            A date object representing the date of St. Patrick's Day.
         """
 
-        return datetime(self.year, 3, 17)
+        return date(self.year, 3, 17)
 
     @property
-    def birthday(self) -> datetime:
+    def birthday(self) -> date:
         """
         Gets the date of Malbench's birthday for the given year.
 
         Returns:
-            A datetime object representing the date of Malbench's birthday.
+            A date object representing the date of Malbench's birthday.
         """
 
-        return datetime(self.year, 4, 1)
+        return date(self.year, 4, 1)
 
     @property
-    def easter(self) -> datetime:
+    def easter(self) -> date:
         """
         Gets the dates of Easter for the given year.
 
         Returns:
-            A datetime object representing the date of Easter.
+            A date object representing the date of Easter.
         """
 
         # Calculate Easter based on Meeus/Jones/Butcher algorithm.
@@ -96,29 +96,29 @@ class Celebrations:
         easter_day = q + 1
         easter_month = p
 
-        return datetime(self.year, easter_month, easter_day)
+        return date(self.year, easter_month, easter_day)
 
     @property
-    def star_wars_day(self) -> datetime:
+    def star_wars_day(self) -> date:
         """
         Get the date of Star Wars Day for the given year.
 
         Returns:
-            A datetime object representing the date of Star Wars Day.
+            A date object representing the date of Star Wars Day.
         """
 
-        return datetime(self.year, 5, 4)
+        return date(self.year, 5, 4)
 
     @property
-    def cinco_de_mayo(self) -> datetime:
+    def cinco_de_mayo(self) -> date:
         """
         Gets the date of Cinco de Mayo for the given year.
 
         Returns:
-            A datetime object representing the date of Cinco de Mayo.
+            A date object representing the date of Cinco de Mayo.
         """
 
-        return datetime(self.year, 5, 5)
+        return date(self.year, 5, 5)
 
     @property
     def mothers_day(self):
@@ -126,11 +126,11 @@ class Celebrations:
         Gets the date of Mother's Day for the given year.
 
         Returns:
-            A datetime object representing the date of Mother's Day.
+            A date object representing the date of Mother's Day.
         """
 
         # Calculate the second Sunday of May (Mother's date).
-        may_1st = datetime(self.year, 5, 1)
+        may_1st = date(self.year, 5, 1)
         may_1st_weekday = may_1st.weekday()
         days_to_second_sunday = (6 - may_1st_weekday) % 7 + 7  # Adding 7 to ensure it goes to the next week
         mothers_day = may_1st + timedelta(days=days_to_second_sunday)
@@ -143,11 +143,11 @@ class Celebrations:
         Gets the date of Father's Day for the given year.
 
         Returns:
-            A datetime object representing the date of Father's Day.
+            A date object representing the date of Father's Day.
         """
 
         # Calculate the third Sunday of June (Father's date).
-        june_1st = datetime(self.year, 6, 1)
+        june_1st = date(self.year, 6, 1)
         june_1st_weekday = june_1st.weekday()
         days_to_third_sunday = (6 - june_1st_weekday) % 7 + 14  # Adding 14 to ensure it goes to the third week
         fathers_day = june_1st + timedelta(days=days_to_third_sunday)
@@ -155,15 +155,15 @@ class Celebrations:
         return fathers_day
 
     @property
-    def labor_day(self) -> datetime:
+    def labor_day(self) -> date:
         """
         Gets the date of Labor Day for the given year.
 
         Returns:
-            A datetime object representing the date of Labor Day.
+            A date object representing the date of Labor Day.
         """
 
-        september_1st = datetime(self.year, 9, 1)
+        september_1st = date(self.year, 9, 1)
         september_1st_weekday = september_1st.weekday()
         days_to_labor_day = (7 - september_1st_weekday) % 7
         labor_day = september_1st + timedelta(days=days_to_labor_day)
@@ -171,38 +171,38 @@ class Celebrations:
         return labor_day
 
     @property
-    def independence_day(self) -> datetime:
+    def independence_day(self) -> date:
         """
         Gets the date of Independence Day for the given year.
 
         Returns:
-            A datetime object representing the date of Independence Day.
+            A date object representing the date of Independence Day.
         """
 
-        return datetime(self.year, 7, 4)
+        return date(self.year, 7, 4)
 
     @property
-    def halloween(self) -> datetime:
+    def halloween(self) -> date:
         """
         Gets the date of Halloween for the given year.
 
         Returns:
-            A datetime object representing the date of Halloween.
+            A date object representing the date of Halloween.
         """
 
-        return datetime(self.year, 10, 31)
+        return date(self.year, 10, 31)
 
     @property
-    def thanksgiving(self) -> datetime:
+    def thanksgiving(self) -> date:
         """
         Gets the date of Thanksgiving for the given year.
 
         Returns:
-            A datetime object representing the date of Thanksgiving.
+            A date object representing the date of Thanksgiving.
         """
 
         # Calculate the fourth Thursday of November (Thanksgiving date).
-        november_1st = datetime(self.year, 11, 1)
+        november_1st = date(self.year, 11, 1)
         november_1st_weekday = november_1st.weekday()
         days_to_first_thursday = (3 - november_1st_weekday) % 7
         days_to_thanksgiving = 21 + days_to_first_thursday
@@ -211,34 +211,34 @@ class Celebrations:
         return thanksgiving
 
     @property
-    def christmas_eve(self) -> datetime:
+    def christmas_eve(self) -> date:
         """
         Gets the date of Christmas Eve for the given year.
 
         Returns:
-            A datetime object representing the date of Christmas Eve.
+            A date object representing the date of Christmas Eve.
         """
 
-        return datetime(self.year, 12, 24)
+        return date(self.year, 12, 24)
 
     @property
-    def christmas(self) -> datetime:
+    def christmas(self) -> date:
         """
         Gets the date of Christmas for the given year.
 
         Returns:
-            A datetime object representing the date of Christmas.
+            A date object representing the date of Christmas.
         """
 
-        return datetime(self.year, 12, 25)
+        return date(self.year, 12, 25)
 
     @property
-    def new_years_eve(self) -> datetime:
+    def new_years_eve(self) -> date:
         """
         Gets the date of New Year's Eve for the given year.
 
         Returns:
-            A datetime object representing the date of New Year's Eve.
+            A date object representing the date of New Year's Eve.
         """
 
-        return datetime(self.year, 12, 31)
+        return date(self.year, 12, 31)
