@@ -24,6 +24,7 @@ class Celebrations:
 
         self.year = year
 
+    @property
     def new_years(self) -> datetime:
         """
         Gets the date of New Year's Day for the given year.
@@ -34,6 +35,7 @@ class Celebrations:
 
         return datetime(self.year, 1, 1)
 
+    @property
     def valentines_day(self) -> datetime:
         """
         Gets the date of Valentine's Day Day for the given year.
@@ -44,6 +46,7 @@ class Celebrations:
 
         return datetime(self.year, 2, 14)
 
+    @property
     def st_patricks_day(self) -> datetime:
         """
         Gets the date of St. Patrick's Day for the given year.
@@ -54,6 +57,7 @@ class Celebrations:
 
         return datetime(self.year, 3, 17)
 
+    @property
     def birthday(self) -> datetime:
         """
         Gets the date of Malbench's birthday for the given year.
@@ -64,6 +68,7 @@ class Celebrations:
 
         return datetime(self.year, 4, 1)
 
+    @property
     def easter(self) -> datetime:
         """
         Gets the dates of Easter for the given year.
@@ -93,6 +98,7 @@ class Celebrations:
 
         return datetime(self.year, easter_month, easter_day)
 
+    @property
     def star_wars_day(self) -> datetime:
         """
         Get the date of Star Wars Day for the given year.
@@ -103,6 +109,7 @@ class Celebrations:
 
         return datetime(self.year, 5, 4)
 
+    @property
     def cinco_de_mayo(self) -> datetime:
         """
         Gets the date of Cinco de Mayo for the given year.
@@ -113,6 +120,7 @@ class Celebrations:
 
         return datetime(self.year, 5, 5)
 
+    @property
     def mothers_day(self):
         """
         Gets the date of Mother's Day for the given year.
@@ -129,6 +137,7 @@ class Celebrations:
 
         return mothers_day
 
+    @property
     def fathers_day(self):
         """
         Gets the date of Father's Day for the given year.
@@ -145,6 +154,7 @@ class Celebrations:
 
         return fathers_day
 
+    @property
     def labor_day(self) -> datetime:
         """
         Gets the date of Labor Day for the given year.
@@ -160,6 +170,7 @@ class Celebrations:
 
         return labor_day
 
+    @property
     def independence_day(self) -> datetime:
         """
         Gets the date of Independence Day for the given year.
@@ -170,6 +181,7 @@ class Celebrations:
 
         return datetime(self.year, 7, 4)
 
+    @property
     def halloween(self) -> datetime:
         """
         Gets the date of Halloween for the given year.
@@ -180,6 +192,7 @@ class Celebrations:
 
         return datetime(self.year, 10, 31)
 
+    @property
     def thanksgiving(self) -> datetime:
         """
         Gets the date of Thanksgiving for the given year.
@@ -197,6 +210,7 @@ class Celebrations:
 
         return thanksgiving
 
+    @property
     def christmas_eve(self) -> datetime:
         """
         Gets the date of Christmas Eve for the given year.
@@ -207,6 +221,7 @@ class Celebrations:
 
         return datetime(self.year, 12, 24)
 
+    @property
     def christmas(self) -> datetime:
         """
         Gets the date of Christmas for the given year.
@@ -217,6 +232,7 @@ class Celebrations:
 
         return datetime(self.year, 12, 25)
 
+    @property
     def new_years_eve(self) -> datetime:
         """
         Gets the date of New Year's Eve for the given year.
