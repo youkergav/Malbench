@@ -1,10 +1,10 @@
 import random
-import holidays
 import textwrap
 import pkg_resources
 from colorama import Fore
 from datetime import date
 from malbench.version import Version
+from malbench.celebrations import Celebrations
 
 
 class Message():
@@ -173,22 +173,31 @@ class Message():
         """Chooses a tag line at random or based on holiday date."""
 
         today = date.today()
-        birthday = date(2023, 4, 1)
+        celebrations = Celebrations(today.year)
 
-        if today.month == birthday.month and today.day == birthday.day:
-            holiday = "birthday"
-        else:
-            holiday = holidays.US(years=today.year).get(today, "").lower()
-
-        if "new year" in holiday:
+        if today in [celebrations.new_years_eve, celebrations.new_years_eve]:
             lines = [
                 "Happy New Year!",
                 "Time to start the New Year with some malware testing!",
                 "Let's kick off the New Year with a bang, shall we?",
                 "Ringing in the New Year with some malicious code!"
             ]
-        elif "birthday" in holiday:
-            age = today.year - birthday.year
+        elif today == celebrations.valentines_day:
+            lines = [
+                "Happy Valentine's Day!"
+                "Who needs flowers and chocolates when you can test malware?",
+                "Spread the love (and malware) this Valentine's Day!",
+                "Sending virtual hugs and malware samples this Valentine's Day!"
+            ]
+        elif today == celebrations.st_patricks_day:
+            lines = [
+                "Happy St. Patrick's Day!"
+                "Feeling lucky? Let's test some malware!",
+                "Searching for a pot of gold... found malware samples instead!",
+                "Don't forget to wear green while testing malware!"
+            ]
+        elif today == celebrations.birthday:
+            age = today.year - celebrations.birthday.year
 
             lines = [
                 f"Happy Birthday to me! Can you believe I am {age} years old?",
@@ -196,21 +205,70 @@ class Message():
                 f"Celebrating with some cake and malware! I am {age} years old.",
                 f":: Malbench turns {age} years old today ::"
             ]
-        elif "independence day" in holiday:
+        elif today == celebrations.easter:
+            lines = [
+                "Happy Easter!",
+                "Hatching plans to break your computer this Easter!",
+                "Egg-cellent malware testing is our Easter tradition!",
+                "Hop into the chaos this Easter!"
+            ]
+        elif today == celebrations.star_wars_day:
+            lines = [
+                "May the 4th be with you.",
+                "May your computer be as secure as the Death Star!",
+                "Testing antivirus from a galaxy far, far away...",
+                "Test antivirus like a true Jedi Master!"
+            ]
+        elif today == celebrations.cinco_de_mayo:
+            lines = [
+                "Happy Cinco de Mayo!",
+                "¡Feliz Cinco de Mayo! Celebrate with some spicy malware!",
+                "Tacos, tequila, and malware, the perfect Cinco de Mayo!",
+                "¡Salud! Here's to a malware-free Cinco de Mayo!",
+            ]
+        elif today == celebrations.mothers_day:
+            lines = [
+                "Happy Mother's Day!",
+                "Wishing all the amazing moms a malware-free day!",
+                "Thank you, Mom, for keeping me safe from malware.",
+                "Malware testing with a sprinkle of mom's love and guidance!",
+            ]
+        elif today == celebrations.fathers_day:
+            lines = [
+                "Happy Father's Day!",
+                "Wishing all the incredible dads a malware-free day!",
+                "Thank you, Dad, for teaching me the importance of cybersecurity.",
+                "Dads are the ultimate malware detectors. Happy Father's Day!",
+            ]
+        elif today == celebrations.labor_day:
+            lines = [
+                "Happy Labor Day!",
+                "Labor Day: a time to relax, but not from malware!",
+                "Wishing you a relaxing and malware-free Labor Day!",
+                "Labor Day: a reminder of the importance of malware defense!"
+            ]
+        elif today == celebrations.independence_day:
             lines = [
                 "Happy 4th of July!",
                 "Celebrate freedom with some malware testing!",
                 "Let's light up the sky... and your computer with some malware!",
                 "Yeah fireworks are a thrill, but have you tried testing malware?"
             ]
-        elif "thanksgiving" in holiday:
+        elif today == celebrations.halloween:
+            lines = [
+                "Happy Halloween!",
+                "Beware of ghosts, ghouls, and malware! Happy Halloween!",
+                "Things are about to get spooky on this malware ride!",
+                "Unleashing monsters this Halloween night!",
+            ]
+        elif today == celebrations.thanksgiving:
             lines = [
                 "Happy Thanksgiving!",
                 "Gobble gobble... with some malware testing on the side!",
                 "Thankful for all the new malware to test!",
                 "Why watch the parade when you can test malware instead?"
             ]
-        elif "christmas" in holiday:
+        elif today in [celebrations.christmas_eve, celebrations.christmas]:
             lines = [
                 "Merry Christmas!"
                 "All we want for Christmas is some new malware to test!",
