@@ -12,11 +12,14 @@
         ".coverage": true
     },
     "cSpell.words": [
+        "cinco",
         "creationflags",
         "docstrings",
         "dotenv",
         "Malbench",
         "malwares",
+        "Meeus",
+        "patricks",
         "pdoc",
         "Pythonic",
         "typecheck",
