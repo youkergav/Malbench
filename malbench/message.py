@@ -295,7 +295,13 @@ class Message():
                 "\"I didn't run this program, did you run this program?!\"",
                 "Disabling their algorithms...",
                 "Loading awesomeness [===============   ]",
-                "Loading pixels...? [===               ]"
+                "Loading pixels...? [===               ]",
+                "I'm not saying my computer has malware, but it's acting like it.",
+                "Why did the malware go to the doctor? It had a virus.",
+                "Practice safe clicks, class!",
+                "Malware: The gift that keeps on giving...to hackers.",
+                "Why did the malware artist go to jail? A phishing addiction."
+
             ]
 
         return random.choice(lines)
