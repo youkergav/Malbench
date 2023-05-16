@@ -1,7 +1,7 @@
 import random
+import colorama
 import textwrap
 import pkg_resources
-from colorama import Fore
 from datetime import date
 from malbench.version import Version
 from malbench.celebrations import Celebrations
@@ -38,6 +38,7 @@ class Message():
         """
 
         self.color = color
+        self._init_color()
 
     def banner(self) -> str:
         """
@@ -49,8 +50,8 @@ class Message():
 
         with pkg_resources.resource_stream("malbench", "data/banner.txt") as f:
             banner = f.read().decode("utf-8").replace("\r", "").format(
-                COLOR=Fore.BLUE if self.color else "",
-                RESET=Fore.RESET if self.color else ""
+                COLOR=colorama.Fore.BLUE if self.color else "",
+                RESET=colorama.Fore.RESET if self.color else ""
             )
 
         return "{}\n  {:61} v{}\n".format(banner, self._gen_tag_line(), Version.version())
@@ -65,8 +66,8 @@ class Message():
 
         with pkg_resources.resource_stream("malbench", "data/disclaimer.txt") as f:
             message = f.read().decode("utf-8").replace("\r", "").format(
-                COLOR=Fore.YELLOW if self.color else "",
-                RESET=Fore.RESET if self.color else ""
+                COLOR=colorama.Fore.YELLOW if self.color else "",
+                RESET=colorama.Fore.RESET if self.color else ""
             )
 
         return textwrap.fill(message, width=80)
@@ -113,7 +114,7 @@ class Message():
         if not self.color:
             return message
 
-        return Fore.RED + message + Fore.RESET
+        return colorama.Fore.RED + message + colorama.Fore.RESET
 
     def yellow(self, message: str) -> str:
         """
@@ -131,7 +132,7 @@ class Message():
         if not self.color:
             return message
 
-        return Fore.YELLOW + message + Fore.RESET
+        return colorama.Fore.YELLOW + message + colorama.Fore.RESET
 
     def green(self, message: str) -> str:
         """
@@ -149,7 +150,7 @@ class Message():
         if not self.color:
             return message
 
-        return Fore.GREEN + message + Fore.RESET
+        return colorama.Fore.GREEN + message + colorama.Fore.RESET
 
     def blue(self, message: str) -> str:
         """
@@ -167,7 +168,13 @@ class Message():
         if not self.color:
             return message
 
-        return Fore.BLUE + message + Fore.RESET
+        return colorama.Fore.BLUE + message + colorama.Fore.RESET
+
+    def _init_color(self) -> None:
+        """Set up the terminal environment to support color, if set."""
+
+        if self.color:
+            colorama.init()
 
     def _gen_tag_line(self) -> str:
         """Chooses a tag line at random or based on holiday date."""
