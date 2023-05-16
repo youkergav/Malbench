@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "malbench"
-version = "0.3.5"
+version = "0.4.0"
 description = "A tool used to benchmark antivirus solutions against real-world malware samples."
 repository = "https://github.com/youkergav/Malbench"
 authors = ["Gavin Youker <youkergav@gmail.com>"]
@@ -40,3 +40,5 @@ test = "coverage run -m unittest discover -s tests"
 coverage = "coverage report --fail-under=80"
 doc = "pdoc -o docs malbench"
 vulncheck = "poetry check"
+build = "poetry build"
+publish = "poetry publish"
