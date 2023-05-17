@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "malbench"
-version = "0.4.0"
+version = "0.4.1"
 description = "A tool used to benchmark antivirus solutions against real-world malware samples."
 repository = "https://github.com/youkergav/Malbench"
 authors = ["Gavin Youker <youkergav@gmail.com>"]
@@ -11,6 +11,7 @@ license = "GPL-3.0-only"
 python = "^3.8.1"
 colorama = "^0.4.6"
 toml = "^0.10.2"
+python-dotenv = "^1.0.0"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
@@ -22,7 +23,6 @@ mypy = "^1.2.0"
 types-toml = "^0.10.8.6"
 types-setuptools = "^67.7.0.0"
 types-colorama = "^0.4.15.11"
-python-dotenv = "^1.0.0"
 poethepoet = "^0.20.0"
 
 [build-system]
