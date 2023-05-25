@@ -75,5 +75,3 @@ This project is licensed under the [GNU General Public License](https://www.gnu.
 
 ## Credits
 Malbench was created by [Gavin Youker](mailto:youkergav@gmail.com).
-
-This is a test.
